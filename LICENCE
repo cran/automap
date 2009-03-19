@@ -1,0 +1,57 @@
+This file is intended to clarify ownership and copyright: where
+possible individual files also carry brief copyright notices. 
+
+Copyrights
+==========
+Most files are copyrighted by Edzer J. Pebesma; some have more authors
+(e.g. nsearch.c, polygon.c), see the files in ./src for more info;
+all other files (R/S files; documentation) are (C) Edzer J. Pebesma.
+
+    Gstat, a program for geostatistical modelling, prediction and simulation
+    Copyright 1992, 2002 (C) Edzer J. Pebesma
+
+    Edzer J. Pebesma, e.pebesma@geog.uu.nl
+    Department of physical geography, Utrecht University
+    P.O. Box 80.115, 3508 TC Utrecht, The Netherlands
+
+    This program is free software; you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation; either version 2 of the License, or
+    (at your option) any later version. As a special exception, linking 
+    this program with the Qt library is permitted.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program; if not, write to the Free Software
+    Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+
+
+meschach matrix library, used by gstat:
+
+/**************************************************************************
+**
+** Copyright (C) 1993 David E. Steward & Zbigniew Leyk, all rights reserved.
+**
+**			     Meschach Library
+** 
+** This Meschach Library is provided "as is" without any express 
+** or implied warranty of any kind with respect to this software. 
+** In particular the authors shall not be liable for any direct, 
+** indirect, special, incidental or consequential damages arising 
+** in any way from use of the software.
+** 
+** Everyone is granted permission to copy, modify and redistribute this
+** Meschach Library, provided:
+**  1.  All copies contain this copyright notice.
+**  2.  All modified copies shall carry a notice stating who
+**      made the last modification and the date of such modification.
+**  3.  No charge is made for this software or works derived from it.  
+**      This clause shall not be construed as constraining other software
+**      distributed on the same medium as this software, nor is a
+**      distribution fee considered a charge.
+**
+***************************************************************************/

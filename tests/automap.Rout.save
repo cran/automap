@@ -1,0 +1,206 @@
+
+R version 2.8.1 (2008-12-22)
+Copyright (C) 2008 The R Foundation for Statistical Computing
+ISBN 3-900051-07-0
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> library(automap)
+Loading required package: sp
+Loading required package: gstat
+> 
+> # Data preparation
+> data(meuse)
+> coordinates(meuse) =~ x+y
+> data(meuse.grid)
+> gridded(meuse.grid) =~ x+y
+> 
+> # Ordinary kriging
+> kriging_result = autoKrige(zinc~1, meuse, meuse.grid)
+[using ordinary kriging]
+> summary(kriging_result)
+krige_output:
+Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+   var1.pred         var1.var        var1.stdev   
+ Min.   : 106.1   Min.   : 40440   Min.   :201.1  
+ 1st Qu.: 207.1   1st Qu.: 49617   1st Qu.:222.7  
+ Median : 309.4   Median : 55256   Median :235.1  
+ Mean   : 406.2   Mean   : 62453   Mean   :247.5  
+ 3rd Qu.: 555.1   3rd Qu.: 69014   3rd Qu.:262.7  
+ Max.   :1620.1   Max.   :142357   Max.   :377.3  
+
+exp_var:
+     np      dist     gamma dir.hor dir.ver   id
+1    17   59.3347  46207.03       0       0 var1
+2    36   86.0145  32203.57       0       0 var1
+3   114  131.0287  53862.70       0       0 var1
+4   149  176.1885  87068.48       0       0 var1
+5   184  226.7565  62486.31       0       0 var1
+6   711  337.6036 104453.77       0       0 var1
+7   830  502.0477 127330.49       0       0 var1
+8  1349  713.2149 150556.52       0       0 var1
+9  1314  961.2718 165153.58       0       0 var1
+10 1139 1213.4116 165495.97       0       0 var1
+11 1355 1506.5505 149245.86       0       0 var1
+
+var_model:
+  model     psill    range kappa
+1   Nug  31957.45   0.0000   0.0
+2   Ste 133556.03 485.5088   1.1
+> 
+> kriging_result = autoKrige(zinc~1, meuse, meuse.grid, fix.values = c(0.2,NA,NA))
+[using ordinary kriging]
+> summary(kriging_result)
+krige_output:
+Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+   var1.pred         var1.var        var1.stdev   
+ Min.   : 119.8   Min.   :  3295   Min.   : 57.4  
+ 1st Qu.: 201.3   1st Qu.: 40754   1st Qu.:201.9  
+ Median : 298.4   Median : 52571   Median :229.3  
+ Mean   : 403.7   Mean   : 58014   Mean   :235.5  
+ 3rd Qu.: 552.0   3rd Qu.: 71374   3rd Qu.:267.2  
+ Max.   :1800.9   Max.   :141490   Max.   :376.2  
+
+exp_var:
+     np      dist     gamma dir.hor dir.ver   id
+1    17   59.3347  46207.03       0       0 var1
+2    36   86.0145  32203.57       0       0 var1
+3   114  131.0287  53862.70       0       0 var1
+4   149  176.1885  87068.48       0       0 var1
+5   184  226.7565  62486.31       0       0 var1
+6   711  337.6036 104453.77       0       0 var1
+7   830  502.0477 127330.49       0       0 var1
+8  1349  713.2149 150556.52       0       0 var1
+9  1314  961.2718 165153.58       0       0 var1
+10 1139 1213.4116 165495.97       0       0 var1
+11 1355 1506.5505 149245.86       0       0 var1
+
+var_model:
+  model    psill    range kappa
+1   Nug      0.2   0.0000   0.0
+2   Ste 173886.7 567.4056   0.4
+> 
+> # Universal kriging
+> kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid)
+[using universal kriging]
+> summary(kriging_result)
+krige_output:
+Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+   var1.pred          var1.var        var1.stdev   
+ Min.   : -31.91   Min.   : 16191   Min.   :127.2  
+ 1st Qu.: 308.28   1st Qu.: 43947   1st Qu.:209.6  
+ Median : 483.07   Median : 56556   Median :237.8  
+ Mean   : 495.43   Mean   : 59161   Mean   :239.5  
+ 3rd Qu.: 654.43   3rd Qu.: 71202   3rd Qu.:266.8  
+ Max.   :1586.57   Max.   :121944   Max.   :349.2  
+
+exp_var:
+     np      dist    gamma dir.hor dir.ver   id
+1    17   59.3347 23959.65       0       0 var1
+2    36   86.0145 16671.65       0       0 var1
+3   114  131.0287 33270.31       0       0 var1
+4   149  176.1885 52846.33       0       0 var1
+5   184  226.7565 34555.29       0       0 var1
+6   711  337.6036 50150.73       0       0 var1
+7   830  502.0477 50347.61       0       0 var1
+8  1349  713.2149 61255.29       0       0 var1
+9  1314  961.2718 70311.91       0       0 var1
+10 1139 1213.4116 75870.33       0       0 var1
+11 1355 1506.5505 72043.88       0       0 var1
+
+var_model:
+  model     psill    range kappa
+1   Nug  2454.994   0.0000   0.0
+2   Ste 68746.155 482.0264   0.3
+> 
+> # Block kriging
+> kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid, block = c(400,400))
+[using universal kriging]
+> summary(kriging_result)
+krige_output:
+Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+   var1.pred           var1.var       var1.stdev    
+ Min.   :  -4.001   Min.   : 4870   Min.   : 69.78  
+ 1st Qu.: 319.267   1st Qu.:17000   1st Qu.:130.39  
+ Median : 503.192   Median :27761   Median :166.62  
+ Mean   : 498.722   Mean   :30744   Mean   :168.24  
+ 3rd Qu.: 669.738   3rd Qu.:39492   3rd Qu.:198.73  
+ Max.   :1193.276   Max.   :88803   Max.   :298.00  
+
+exp_var:
+     np      dist    gamma dir.hor dir.ver   id
+1    17   59.3347 23959.65       0       0 var1
+2    36   86.0145 16671.65       0       0 var1
+3   114  131.0287 33270.31       0       0 var1
+4   149  176.1885 52846.33       0       0 var1
+5   184  226.7565 34555.29       0       0 var1
+6   711  337.6036 50150.73       0       0 var1
+7   830  502.0477 50347.61       0       0 var1
+8  1349  713.2149 61255.29       0       0 var1
+9  1314  961.2718 70311.91       0       0 var1
+10 1139 1213.4116 75870.33       0       0 var1
+11 1355 1506.5505 72043.88       0       0 var1
+
+var_model:
+  model     psill    range kappa
+1   Nug  2454.994   0.0000   0.0
+2   Ste 68746.155 482.0264   0.3
+> 

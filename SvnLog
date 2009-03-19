@@ -1,0 +1,432 @@
+------------------------------------------------------------------------
+r521 | paulhiemstra | 2009-03-19 09:43:14 +0100 (Thu, 19 Mar 2009) | 1 line
+Changed paths:
+   M /automap/NAMESPACE
+   D /automap/R/automap_pause.r
+   M /automap/demo/automap.r
+
+I first used automap_pause() to halt execution in the demo script. I now switched to Sys.sleep.
+------------------------------------------------------------------------
+r515 | paulhiemstra | 2009-03-13 13:57:36 +0100 (Fri, 13 Mar 2009) | 1 line
+Changed paths:
+   M /automap/R/automapPlot.r
+
+If zcol is not given, assume that the user wants to plot all the attributes
+------------------------------------------------------------------------
+r514 | paulhiemstra | 2009-03-13 13:56:58 +0100 (Fri, 13 Mar 2009) | 1 line
+Changed paths:
+   M /automap/man/automapPlot.rd
+
+Updated the documentation to relfect the fact that the classIntervals function from the classInt package is no longer supported.
+------------------------------------------------------------------------
+r513 | paulhiemstra | 2009-03-13 13:27:29 +0100 (Fri, 13 Mar 2009) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+   M /automap/R/autoKrige.r
+
+If a user passes only a SpatialPointsDataFrame as an option, autoKrige now assumes that you want to perform Ordinary Kriging on the first attribute of the SpatialPointsDataFrame. Completely backwards compatible with the old syntax before 0.5-4.
+------------------------------------------------------------------------
+r411 | paulhiemstra | 2009-02-13 12:09:37 +0100 (Fri, 13 Feb 2009) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+   M /automap/R/autoKrige.r
+   M /automap/R/autofitVariogram.r
+   M /automap/man/autoKrige.rd
+   M /automap/man/autofitVariogram.rd
+   M /automap/man/automapPlot.rd
+   M /automap/tests/autoKrige.cv.Rout.save
+   M /automap/tests/automap.Rout.save
+
+The standard models that are checked now include the Ste model instead of the Mat model. Updated the man pages, the tests and the source to reflect this.
+------------------------------------------------------------------------
+r360 | paulhiemstra | 2009-02-04 12:28:52 +0100 (Wed, 04 Feb 2009) | 1 line
+Changed paths:
+   M /automap/R/autoKrige.cv.r
+
+Added the mean absolute error to summary.autoKrige.cv
+------------------------------------------------------------------------
+r343 | edzer | 2009-02-02 10:14:16 +0100 (Mon, 02 Feb 2009) | 2 lines
+Changed paths:
+   M /automap/R/autofitVariogram.r
+
+c() around max(),median() to find start value sill
+
+------------------------------------------------------------------------
+r326 | paulhiemstra | 2009-01-20 14:58:38 +0100 (Tue, 20 Jan 2009) | 1 line
+Changed paths:
+   M /automap/R/autofitVariogram.r
+
+deleted some superfluous code
+------------------------------------------------------------------------
+r272 | edzer | 2008-11-14 12:45:02 +0100 (Fri, 14 Nov 2008) | 2 lines
+Changed paths:
+   M /automap/R/autofitVariogram.r
+
+set debug.level to 0
+
+------------------------------------------------------------------------
+r223 | edzer | 2008-11-12 16:03:26 +0100 (Wed, 12 Nov 2008) | 2 lines
+Changed paths:
+   M /automap/R/autofitVariogram.r
+
+added variogram model Ste (M. Stein's representation of the Matern)
+
+------------------------------------------------------------------------
+r222 | paulhiemstra | 2008-11-12 13:50:17 +0100 (Wed, 12 Nov 2008) | 1 line
+Changed paths:
+   M /automap/R/automapPlot.r
+
+The at argument is no longer custom made in this function and is transferred to the "..." argument
+------------------------------------------------------------------------
+r221 | paulhiemstra | 2008-11-12 13:47:18 +0100 (Wed, 12 Nov 2008) | 1 line
+Changed paths:
+   M /automap/R/autofitVariogram.r
+
+Linking the setting of the debug.level in fit.variogram to the verbose argument in autoKrige and autofitVariogram
+------------------------------------------------------------------------
+r219 | edzer | 2008-11-12 11:15:09 +0100 (Wed, 12 Nov 2008) | 2 lines
+Changed paths:
+   M /automap/R/autofitVariogram.r
+
+added debug.level = 0 to fit.variogram, to suppress warning messages on singular fit
+
+------------------------------------------------------------------------
+r188 | paulhiemstra | 2008-11-04 15:37:18 +0100 (Tue, 04 Nov 2008) | 1 line
+Changed paths:
+   M /automap/R/autofitVariogram.r
+   M /automap/R/automapPlot.r
+   M /automap/R/posPredictionInterval.r
+
+Removed most of the comments from the code
+------------------------------------------------------------------------
+r187 | paulhiemstra | 2008-11-04 15:37:05 +0100 (Tue, 04 Nov 2008) | 2 lines
+Changed paths:
+   M /automap/R/autoKrige.r
+
+1) Added a check to see if new_data is present if the user wants to perform UK, throw and error if it does
+2) Removed most of the comments from the code
+------------------------------------------------------------------------
+r186 | paulhiemstra | 2008-11-04 15:16:28 +0100 (Tue, 04 Nov 2008) | 1 line
+Changed paths:
+   D /automap/tests/automap.r
+
+Changed the extension from .r to .R for R CMD check
+------------------------------------------------------------------------
+r185 | paulhiemstra | 2008-11-04 15:16:03 +0100 (Tue, 04 Nov 2008) | 1 line
+Changed paths:
+   A /automap/tests/autoKrige.cv.R
+   A /automap/tests/autoKrige.cv.Rout.save
+   A /automap/tests/automap.R
+   A /automap/tests/automap.Rout.save
+
+Changed the file extension from .r to .R, this is needed for R CMD check. Also added the .Rout.save files.
+------------------------------------------------------------------------
+r184 | paulhiemstra | 2008-11-04 15:14:02 +0100 (Tue, 04 Nov 2008) | 1 line
+Changed paths:
+   M /automap/man/autofitVariogram.rd
+   M /automap/man/automapPlot.rd
+   M /automap/man/compare.cv.rd
+
+Small changes in the text
+------------------------------------------------------------------------
+r183 | paulhiemstra | 2008-11-04 11:28:50 +0100 (Tue, 04 Nov 2008) | 1 line
+Changed paths:
+   M /automap/NAMESPACE
+
+Updated the namespace to include automap_pause
+------------------------------------------------------------------------
+r182 | paulhiemstra | 2008-11-04 10:56:21 +0100 (Tue, 04 Nov 2008) | 1 line
+Changed paths:
+   A /automap/R/automap_pause.r
+   M /automap/demo/automap.r
+
+Added the function automap_pause and used it in the demo
+------------------------------------------------------------------------
+r181 | paulhiemstra | 2008-11-04 10:22:27 +0100 (Tue, 04 Nov 2008) | 1 line
+Changed paths:
+   M /automap/R/autofitVariogram.r
+
+Update
+------------------------------------------------------------------------
+r180 | paulhiemstra | 2008-11-04 10:22:03 +0100 (Tue, 04 Nov 2008) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+   M /automap/R/automapPlot.r
+
+Removed code from automapPlot that depended on the classInt package
+------------------------------------------------------------------------
+r179 | paulhiemstra | 2008-11-04 10:16:19 +0100 (Tue, 04 Nov 2008) | 1 line
+Changed paths:
+   A /automap/inst
+   A /automap/inst/CITATION
+
+Added citation file to allow people to correctly cite this package
+------------------------------------------------------------------------
+r178 | paulhiemstra | 2008-11-03 15:02:18 +0100 (Mon, 03 Nov 2008) | 1 line
+Changed paths:
+   M /automap/R/autoKrige.cv.r
+
+Get rid of a complaint by R CMD check
+------------------------------------------------------------------------
+r177 | paulhiemstra | 2008-11-03 15:01:46 +0100 (Mon, 03 Nov 2008) | 1 line
+Changed paths:
+   M /automap/man/autoKrige.rd
+   M /automap/man/automapPlot.rd
+   M /automap/man/plot.autoKrige.rd
+   M /automap/man/posPredictionInterval.rd
+
+Updated the documentation to get rid om some errors in R CMD check
+------------------------------------------------------------------------
+r176 | paulhiemstra | 2008-11-03 15:00:38 +0100 (Mon, 03 Nov 2008) | 1 line
+Changed paths:
+   M /automap/demo/automap.r
+
+Extended the demo to include example of autoKrige.cv
+------------------------------------------------------------------------
+r173 | paulhiemstra | 2008-10-30 17:40:50 +0100 (Thu, 30 Oct 2008) | 3 lines
+Changed paths:
+   M /automap/DESCRIPTION
+
+New version with some fixes:
+Bugs removed, 
+removed dependencie on classInt
+------------------------------------------------------------------------
+r172 | paulhiemstra | 2008-10-30 17:40:18 +0100 (Thu, 30 Oct 2008) | 1 line
+Changed paths:
+   M /automap/R/autofitVariogram.r
+   M /automap/R/automapPlot.r
+
+Removed dependencie on classInt and fixed some bugs (Jon requested)
+------------------------------------------------------------------------
+r171 | paulhiemstra | 2008-10-30 17:39:26 +0100 (Thu, 30 Oct 2008) | 1 line
+Changed paths:
+   M /automap/man/autoKrige.rd
+   M /automap/man/autoKrige_cv.rd
+   M /automap/man/autofitVariogram.rd
+   M /automap/man/automapPlot.rd
+   M /automap/man/compare.cv.rd
+   M /automap/man/plot.autoKrige.rd
+   M /automap/man/posPredictionInterval.rd
+
+Updated the documentation
+------------------------------------------------------------------------
+r160 | paulhiemstra | 2008-09-30 14:15:35 +0200 (Tue, 30 Sep 2008) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+
+Updated the Description part
+------------------------------------------------------------------------
+r159 | paulhiemstra | 2008-09-30 10:36:49 +0200 (Tue, 30 Sep 2008) | 1 line
+Changed paths:
+   M /automap/man/compare.cv.rd
+
+Expanded the documentation file
+------------------------------------------------------------------------
+r158 | paulhiemstra | 2008-09-30 10:36:02 +0200 (Tue, 30 Sep 2008) | 1 line
+Changed paths:
+   M /automap/R/autoKrige.cv.r
+
+Improved the plotting when plot.diff == TRUE
+------------------------------------------------------------------------
+r157 | paulhiemstra | 2008-09-29 18:09:18 +0200 (Mon, 29 Sep 2008) | 1 line
+Changed paths:
+   M /automap/NAMESPACE
+
+Added new functions to the namespace
+------------------------------------------------------------------------
+r156 | paulhiemstra | 2008-09-29 18:06:59 +0200 (Mon, 29 Sep 2008) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+
+Updated to a new version of automap, 0.5-1
+------------------------------------------------------------------------
+r155 | paulhiemstra | 2008-09-29 18:06:18 +0200 (Mon, 29 Sep 2008) | 1 line
+Changed paths:
+   M /automap/man/autoKrige.rd
+
+Added: If no new_data argument is passed, a default one is created using the create_new_data function. Updated the documentation.
+------------------------------------------------------------------------
+r154 | paulhiemstra | 2008-09-29 18:05:48 +0200 (Mon, 29 Sep 2008) | 1 line
+Changed paths:
+   M /automap/R/autoKrige.r
+
+Added: If no new_data argument is passed, a default one is created using the create_new_data function
+------------------------------------------------------------------------
+r153 | paulhiemstra | 2008-09-29 18:03:07 +0200 (Mon, 29 Sep 2008) | 1 line
+Changed paths:
+   A /automap/R/create_new_data.r
+
+Initial commit: function to create a default new_data object
+------------------------------------------------------------------------
+r152 | paulhiemstra | 2008-09-29 15:49:19 +0200 (Mon, 29 Sep 2008) | 1 line
+Changed paths:
+   M /automap/R/autofitVariogram.r
+
+Added: If one of the possible variogram models that are tested fails, the function no longer generates an error, but skips this model and provides the user with a warning
+------------------------------------------------------------------------
+r151 | paulhiemstra | 2008-09-29 15:47:13 +0200 (Mon, 29 Sep 2008) | 1 line
+Changed paths:
+   A /automap/man/compare.cv.rd
+
+initial commit of the man-page for compare.cv
+------------------------------------------------------------------------
+r150 | paulhiemstra | 2008-09-29 15:46:27 +0200 (Mon, 29 Sep 2008) | 1 line
+Changed paths:
+   A /automap/man/autoKrige_cv.rd
+
+initial commit of the man page for autoKrige.cv
+------------------------------------------------------------------------
+r149 | paulhiemstra | 2008-09-29 15:43:38 +0200 (Mon, 29 Sep 2008) | 1 line
+Changed paths:
+   A /automap/R/autoKrige.cv.r
+
+initial commit of some functions to make crossvalidation easier
+------------------------------------------------------------------------
+r143 | paulhiemstra | 2008-09-22 12:12:12 +0200 (Mon, 22 Sep 2008) | 1 line
+Changed paths:
+   M /automap/man/automapPlot.rd
+
+Changed "style = pretty" to "style = equal"
+------------------------------------------------------------------------
+r142 | paulhiemstra | 2008-09-22 12:06:37 +0200 (Mon, 22 Sep 2008) | 1 line
+Changed paths:
+   M /automap/man/autoKrige.rd
+
+Updated the documentation to reflect the new code
+------------------------------------------------------------------------
+r128 | paulhiemstra | 2008-06-06 11:58:51 +0200 (Fri, 06 Jun 2008) | 2 lines
+Changed paths:
+   M /automap/R/autoKrige.r
+   M /automap/man/autoKrige.rd
+   M /automap/man/autofitVariogram.rd
+
+added "GLS.model = " to autoKrige.r
+updated the man pages of autokrige.r and autofitVariogram.r ot include "GLS.mode = "
+------------------------------------------------------------------------
+r127 | paulhiemstra | 2008-06-06 10:24:36 +0200 (Fri, 06 Jun 2008) | 3 lines
+Changed paths:
+   M /automap/R/autoKrige.r
+   M /automap/R/autofitVariogram.r
+   M /automap/R/automapPlot.r
+   M /automap/man/autofitVariogram.rd
+
+Added GLS.model to autofitVariogram, updated man page
+Deleted some not up to date comments in the code
+Changed the style in automapPlot to "equal", more robust
+------------------------------------------------------------------------
+r115 | paulhiemstra | 2008-04-16 13:17:03 +0200 (Wed, 16 Apr 2008) | 1 line
+Changed paths:
+   M /automap/man/autoKrige.rd
+
+Updated the documentation to include the ... paramters that allows users to pass on arguments to the gstat function krige
+------------------------------------------------------------------------
+r114 | paulhiemstra | 2008-04-16 13:16:13 +0200 (Wed, 16 Apr 2008) | 1 line
+Changed paths:
+   M /automap/R/autoKrige.r
+
+Added the ... parameter to allow parameters to be passed on to the gstat function krige
+------------------------------------------------------------------------
+r108 | paulhiemstra | 2008-04-08 15:32:48 +0200 (Tue, 08 Apr 2008) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+
+Some changes, increased the version number
+------------------------------------------------------------------------
+r107 | paulhiemstra | 2008-04-08 15:31:50 +0200 (Tue, 08 Apr 2008) | 4 lines
+Changed paths:
+   M /automap/man/autoKrige.rd
+   M /automap/man/autofitVariogram.rd
+
+Corrected some errors in the documentation (arguments were not displayed correctly) 
+and added some explantion (what are the names of the attributes of an autoKrige object)
+
+
+------------------------------------------------------------------------
+r106 | paulhiemstra | 2008-04-08 15:30:19 +0200 (Tue, 08 Apr 2008) | 1 line
+Changed paths:
+   M /automap/R/autoKrige.r
+
+Removing duplicates now gives a warning message to the use
+------------------------------------------------------------------------
+r99 | paulhiemstra | 2008-04-01 12:37:59 +0200 (Tue, 01 Apr 2008) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+
+Updated description file
+------------------------------------------------------------------------
+r98 | paulhiemstra | 2008-04-01 12:36:41 +0200 (Tue, 01 Apr 2008) | 2 lines
+Changed paths:
+   M /automap/R/autofitVariogram.r
+   M /automap/R/automapPlot.r
+   M /automap/man/automapPlot.rd
+
+For sample variogram, classes < 5 point pairs are merged with nex class
+implemented BFS colorscale
+------------------------------------------------------------------------
+r75 | paulhiemstra | 2008-02-25 13:47:48 +0100 (Mon, 25 Feb 2008) | 3 lines
+Changed paths:
+   M /automap/DESCRIPTION
+   M /automap/R/autoKrige.r
+   M /automap/R/autofitVariogram.r
+   M /automap/R/automapPlot.r
+   M /automap/man/autoKrige.rd
+   M /automap/man/autofitVariogram.rd
+
+Added "verbose" argument to control feedback on interpolation
+Improved automapPlot, can now handle lists in the "zcol" argument
+updated the documentation
+------------------------------------------------------------------------
+r70 | paulhiemstra | 2008-02-14 14:21:21 +0100 (Thu, 14 Feb 2008) | 5 lines
+Changed paths:
+   M /automap/DESCRIPTION
+   M /automap/R/autoKrige.r
+   M /automap/R/autofitVariogram.r
+   M /automap/demo/automap.r
+   M /automap/man/autoKrige.rd
+   M /automap/man/autofitVariogram.rd
+   M /automap/man/automapPlot.rd
+   M /automap/tests/automap.r
+
+Made syntax more clear:
+Removed autoselect.model
+added formula syntax
+removed check for number of rows in input_data
+updated the documentation
+------------------------------------------------------------------------
+r23 | paulhiemstra | 2008-01-07 15:16:45 +0100 (Mon, 07 Jan 2008) | 1 line
+Changed paths:
+   A /automap/DESCRIPTION
+   A /automap/LICENCE
+   A /automap/NAMESPACE
+   A /automap/R
+   A /automap/R/autoKrige.r
+   A /automap/R/autofitVariogram.r
+   A /automap/R/autokrige.vgm.panel.r
+   A /automap/R/automapPlot.r
+   A /automap/R/plot.autoKrige.r
+   A /automap/R/plot.autofitVariogram.r
+   A /automap/R/plot.posPredictionInterval.r
+   A /automap/R/posPredictionInterval.r
+   A /automap/R/summary.autoKrige.r
+   A /automap/R/summary.autofitVariogram.r
+   A /automap/R/summary.posPredictionInterval.r
+   A /automap/demo
+   A /automap/demo/00Index
+   A /automap/demo/automap.r
+   A /automap/man
+   A /automap/man/autoKrige.rd
+   A /automap/man/autofitVariogram.rd
+   A /automap/man/automapPlot.rd
+   A /automap/man/plot.autoKrige.rd
+   A /automap/man/posPredictionInterval.rd
+   A /automap/tests
+   A /automap/tests/automap.r
+
+initial import from cvs to svn
+------------------------------------------------------------------------
+r22 | paulhiemstra | 2008-01-07 15:10:53 +0100 (Mon, 07 Jan 2008) | 1 line
+Changed paths:
+   A /automap
+
+
+------------------------------------------------------------------------
