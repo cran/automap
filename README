@@ -13,6 +13,8 @@ Follow the instructions on the screen.
 
 Acknowledgements:
 I wish to thank Edzer Pebesma (author of gstat) and Jon Skoien for 
-having very useful discussions with me during the development of automap. 
+having very useful discussions with me during the development of automap and
+Arien Lam and Wiebe Nijland for test-driving the package and providing 
+suggestions and comments on the documentation. 
 In addition I would like to thank Mathieu Grelier for suggesting a useful
-feature to automap.
+feature to automap. 

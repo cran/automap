@@ -1,6 +1,6 @@
 
-R version 2.8.1 (2008-12-22)
-Copyright (C) 2008 The R Foundation for Statistical Computing
+R version 2.9.0 (2009-04-17)
+Copyright (C) 2009 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -496,18 +496,36 @@ Loading required package: gstat
 [using universal kriging]
 > 
 > summary(kr.cv)
-   mean_error       MAE       MSE      MSNE cor_obspred cor_predres      RMSE
-1 0.002008094 0.2917935 0.1548970 0.8555261   0.8374483  0.04026522 0.3935695
-      URMSE       iqr
-1 0.3935644 0.4275074
+                   [,1]
+mean_error  0.002008094
+MAE         0.291793494
+MSE         0.154896959
+MSNE        0.855526096
+cor_obspred 0.837448324
+cor_predres 0.040265220
+RMSE        0.393569510
+URMSE       0.393564387
+iqr         0.427507414
 > summary(kr_dist.cv)
-    mean_error       MAE       MSE     MSNE cor_obspred cor_predres      RMSE
-1 -0.003064504 0.2706937 0.1429581 1.070710    0.850928 -0.02513175 0.3780980
-      URMSE       iqr
-1 0.3780855 0.4034385
+                    [,1]
+mean_error  -0.003064504
+MAE          0.270693666
+MSE          0.142958068
+MSNE         1.070710153
+cor_obspred  0.850928062
+cor_predres -0.025131755
+RMSE         0.378097961
+URMSE        0.378085541
+iqr          0.403438548
 > summary(kr_dist_ffreq.cv)
-     mean_error       MAE       MSE     MSNE cor_obspred cor_predres      RMSE
-1 -0.0008806295 0.2345309 0.1032282 1.083211   0.8948614 -0.02776778 0.3212915
-      URMSE       iqr
-1 0.3212903 0.3628917
+                     [,1]
+mean_error  -0.0008806295
+MAE          0.2345309406
+MSE          0.1032282022
+MSNE         1.0832114308
+cor_obspred  0.8948613597
+cor_predres -0.0277677803
+RMSE         0.3212914598
+URMSE        0.3212902530
+iqr          0.3628917263
 > 

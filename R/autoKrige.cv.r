@@ -41,7 +41,7 @@ summary.autoKrige.cv = function(object, ...) {
 	# Inter quartile range, ideally small
 	out$iqr = IQR(obj$residual)
 
-	return(data.frame(out))
+	return(t(data.frame(out)))
 }
 
 compare.cv = function(..., col.names, bubbleplots = FALSE, zcol = "residual", 

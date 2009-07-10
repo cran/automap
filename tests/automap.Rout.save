@@ -1,6 +1,6 @@
 
-R version 2.8.1 (2008-12-22)
-Copyright (C) 2008 The R Foundation for Statistical Computing
+R version 2.9.0 (2009-04-17)
+Copyright (C) 2009 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
@@ -69,6 +69,7 @@ var_model:
   model     psill    range kappa
 1   Nug  31957.45   0.0000   0.0
 2   Ste 133556.03 485.5088   1.1
+Sums of squares betw. var. model and sample var.[1] 4235991
 > 
 > kriging_result = autoKrige(zinc~1, meuse, meuse.grid, fix.values = c(0.2,NA,NA))
 [using ordinary kriging]
@@ -113,6 +114,7 @@ var_model:
   model    psill    range kappa
 1   Nug      0.2   0.0000   0.0
 2   Ste 173886.7 567.4056   0.4
+Sums of squares betw. var. model and sample var.[1] 4751276
 > 
 > # Universal kriging
 > kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid)
@@ -158,6 +160,7 @@ var_model:
   model     psill    range kappa
 1   Nug  2454.994   0.0000   0.0
 2   Ste 68746.155 482.0264   0.3
+Sums of squares betw. var. model and sample var.[1] 2044182
 > 
 > # Block kriging
 > kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid, block = c(400,400))
@@ -203,4 +206,5 @@ var_model:
   model     psill    range kappa
 1   Nug  2454.994   0.0000   0.0
 2   Ste 68746.155 482.0264   0.3
+Sums of squares betw. var. model and sample var.[1] 2044182
 > 

@@ -21,9 +21,8 @@ plot.posPredictionInterval = function(x, sp.layout = NULL, justPosition = TRUE, 
                         main = main,
                         col.regions = color,
                         sp.layout = sp.layout,
+						sub = paste(x$p, "% pred. interval relative to ", round(x$value, digits = 1), sep = ""),
                         ...)
-    # FIXME put a text with the value and p on the graph
-    # ltext(.5,.5,"Piet")
     if(justPosition) print(position)
     else {                    
         print(lower, position = c(0,.5,.5,1), more = T)

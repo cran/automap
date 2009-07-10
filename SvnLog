@@ -1,4 +1,76 @@
 ------------------------------------------------------------------------
+r644 | paulhiemstra | 2009-07-10 14:57:30 +0200 (Fri, 10 Jul 2009) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+
+New version
+------------------------------------------------------------------------
+r643 | paulhiemstra | 2009-07-10 14:57:01 +0200 (Fri, 10 Jul 2009) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+
+Upgraded to a new version
+------------------------------------------------------------------------
+r642 | paulhiemstra | 2009-07-10 14:56:41 +0200 (Fri, 10 Jul 2009) | 1 line
+Changed paths:
+   M /automap/inst/CITATION
+
+Updated the citation to include the DOI
+------------------------------------------------------------------------
+r641 | paulhiemstra | 2009-07-10 14:50:40 +0200 (Fri, 10 Jul 2009) | 1 line
+Changed paths:
+   M /automap/R/autoKrige.r
+   M /automap/man/autoKrige.rd
+
+Added some checks of the projections to autoKrige. Also updated the documentation.
+------------------------------------------------------------------------
+r591 | paulhiemstra | 2009-06-23 13:16:02 +0200 (Tue, 23 Jun 2009) | 1 line
+Changed paths:
+   M /automap/R/summary.autoKrige.r
+   M /automap/R/summary.autofitVariogram.r
+
+Added sserr to the output of the summary functions
+------------------------------------------------------------------------
+r590 | paulhiemstra | 2009-06-23 12:48:16 +0200 (Tue, 23 Jun 2009) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+   M /automap/R/autoKrige.r
+   M /automap/R/autofitVariogram.r
+   M /automap/man/autoKrige.rd
+   M /automap/man/autofitVariogram.rd
+
+Added the sums of squares (sserr) to the output of autoKrige and autofitVariogram
+------------------------------------------------------------------------
+r544 | paulhiemstra | 2009-05-15 14:01:20 +0200 (Fri, 15 May 2009) | 1 line
+Changed paths:
+   M /automap/R/autoKrige.cv.r
+
+The output from summary.autoKrige.cv is now in a column instead of a row
+------------------------------------------------------------------------
+r536 | paulhiemstra | 2009-04-28 12:23:55 +0200 (Tue, 28 Apr 2009) | 1 line
+Changed paths:
+   M /automap/R/plot.posPredictionInterval.r
+
+Added the sub argument to the position part of the function. This shows which pred. interval is used and relative to which value the pred. interval is compared.
+------------------------------------------------------------------------
+r524 | paulhiemstra | 2009-03-19 14:06:37 +0100 (Thu, 19 Mar 2009) | 1 line
+Changed paths:
+   M /automap/README
+
+Added extra acknowledgements to the README file
+------------------------------------------------------------------------
+r523 | paulhiemstra | 2009-03-19 14:03:53 +0100 (Thu, 19 Mar 2009) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+
+Updated the version number from 0.5-4 to 1.0-0 for the release of the package to CRAN
+------------------------------------------------------------------------
+r522 | paulhiemstra | 2009-03-19 14:03:03 +0100 (Thu, 19 Mar 2009) | 1 line
+Changed paths:
+   A /automap/README
+
+Readme file added for the release to CRAN
+------------------------------------------------------------------------
 r521 | paulhiemstra | 2009-03-19 09:43:14 +0100 (Thu, 19 Mar 2009) | 1 line
 Changed paths:
    M /automap/NAMESPACE

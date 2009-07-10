@@ -34,6 +34,22 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
         }
     }
     
+	if(missing(new_data)) new_data = create_new_data(input_data)
+
+	## Perform some checks on the projection systems of input_data and new_data
+	p4s_obj1 = proj4string(input_data)
+ 	p4s_obj2 = proj4string(new_data)
+	if(!all(is.na(c(p4s_obj1, p4s_obj2)))) {
+		if(is.na(p4s_obj1) & !is.na(p4s_obj2)) proj4string(input_data) = proj4string(new_data)
+		if(!is.na(p4s_obj1) & is.na(p4s_obj2)) proj4string(new_data) = proj4string(input_data)
+		if(any(!c(is.projected(input_data), is.projected(new_data)))) stop(paste("Either input_data or new_data is in LongLat, please reproject.\n", 
+											"  input_data: ", p4s_obj1, "\n",
+											"  new_data:   ", p4s_obj2, "\n"))
+		if(proj4string(input_data) != proj4string(new_data)) stop(paste("Projections of input_data and new_data do not match:\n",
+											"  input_data: ", p4s_obj1, "\n",
+											"  new_data:    ", p4s_obj2, "\n"))
+	}
+
     # Fit the variogram model, first check which model is used
     variogram_object = autofitVariogram(formula,
                       data_variogram,
@@ -43,8 +59,6 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
                       fix.values = fix.values,
 					  verbose = verbose,
 					  GLS.model = GLS.model)
-
-	if(missing(new_data)) new_data = create_new_data(input_data)
 
     ## Perform the interpolation
     krige_result = krige(formula,
@@ -57,7 +71,7 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
     krige_result$var1.stdev = sqrt(krige_result$var1.var)
 
     # Aggregate the results into an autoKrige object
-    result = list(krige_output = krige_result,exp_var = variogram_object$exp_var, var_model = variogram_object$var_model)
+    result = list(krige_output = krige_result,exp_var = variogram_object$exp_var, var_model = variogram_object$var_model, sserr = variogram_object$sserr)
     class(result) = c("autoKrige","list")
 
     return(result)

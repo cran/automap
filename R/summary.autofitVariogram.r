@@ -5,4 +5,6 @@ summary.autofitVariogram = function(object, ...)
      print(object$exp_var, ...)
      cat("\nFitted variogram model:\n")
      print(object$var_model, ...)
+	 cat("Sums of squares betw. var. model and sample var.")
+	 print(object$sserr)
 }

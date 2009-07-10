@@ -49,14 +49,28 @@
 \details{
 \code{autoKrige} calls the function \code{autofitVariogram} that fits a variogram model to the
 given dataset. This variogram model and the data are used to make predictions on the locations
-in \code{new_data}. The only compulsory arguments are formula and \code{input_data}. So the most
+in \code{new_data}. The only compulsory argument is \code{input_data}. So the most
 simple call would of the form:
 
-\code{autoKrige(zinc~1, meuse)}
+\code{autoKrige(meuse)}
+
+\code{autoKrige} now assumes that you want to perform ordinary kriging on the first column of 
+\code{input_data}.
+
+\code{autoKrige} performs some checks on the coordinate systems of \code{input_data} and \code{new_data}.
+If one of both is \code{NA}, it is assigned the projection of the other. If they have different projections,
+an error is raised. If one of both has a non-projected system (i.e. latitude-longitude), an error is raised.
+This error is raised because 'gstat does use spherical distances when data are in geographical
+coordinates, however the usual variogram models are typically not
+non-negative definite on the sphere, and no appropriate models are
+available' (Edzer Pebesma on r-sig-geo).
 }
 \value{This function returns an \code{autoKrige} object containing the results of the interpolation 
-(prediction, variance and standard deviation), the sample variogram and the variogram model that
-was fitted by \code{autofitVariogram}. The attribute names are \code{krige_output}, \code{exp_var}, \code{var_model} respectively.} 
+(prediction, variance and standard deviation), the sample variogram, the variogram model that
+was fitted by \code{autofitVariogram} and the sums of squares between the sample variogram and the
+fitted variogram model. The attribute names are \code{krige_output}, \code{exp_var}, \code{var_model} 
+and \code{sserr} respectively.
+} 
 \references{}
 \note{}
 \author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}

@@ -136,7 +136,7 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
 	# Get rid of the variogram fits that failed
 	#vgm_list
 
-	result = list(exp_var = experimental_variogram, var_model = vgm_list[[which.min(SSerr_list)]])
+	result = list(exp_var = experimental_variogram, var_model = vgm_list[[which.min(SSerr_list)]], sserr = min(SSerr_list))
 	class(result) = c("autofitVariogram","list")    
 
     return(result)

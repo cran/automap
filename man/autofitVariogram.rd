@@ -52,8 +52,9 @@ A list of all permitted variogram models is available by typing vgm() into the R
 that has the smallest residual sum of squares with the sample variogram. For the Matern model, all the 
 kappa values in \code{kappa} are tested. 
 }
-\value{An object of type \code{autofitVariogram} is returned. This object contains the experimental variogram
-and the fitted variogram model}
+\value{An object of type \code{autofitVariogram} is returned. This object contains the experimental variogram, 
+the fitted variogram model and the sums of squares (\code{sserr}) between the sample variogram and the
+fitted variogram model.}
 \note{\code{autofitVariogram} is mostly used indirectly through the function \code{autoKrige}}
 \author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
 \seealso{\code{\link[pkg:gstat]{fit.variogram}}, \code{\link{autoKrige}}, \code{\link{posPredictionInterval}}}
