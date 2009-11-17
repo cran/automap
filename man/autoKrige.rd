@@ -23,7 +23,7 @@
 				universal kriging, suppose 'z' is linearly dependent on 'x'
 				and 'y', use the formula 'z~x+y'.}
     \item{input_data}{An object of the 
-	            \link[pkg:sp]{SpatialPointsDataFrame-class} containing the data to be interpolated.}
+	            \link[sp]{SpatialPointsDataFrame-class} containing the data to be interpolated.}
     \item{new_data}{A \code{sp} object containing the prediction locations. \code{new_data} can be
 				a points set, a grid or a polygon. Must not contain NA's. If this object is not provided
 				a default is calculated. This is done by taking the convex hull of \code{input_data} and 
@@ -44,7 +44,7 @@
 	\item{verbose}{logical, if TRUE autoKrige will give extra information on the fitting process}
 	\item{GLS.model}{If a variogram model is passed on through this parameter a Generalized Least Squares 
 				 sample variogram is calculated.} 
-	\item{...}{arguments that are passed on to the gstat function \code{\link[pkg:gstat]{krige}}.}
+	\item{...}{arguments that are passed on to the gstat function \code{\link[gstat]{krige}}.}
 }
 \details{
 \code{autoKrige} calls the function \code{autofitVariogram} that fits a variogram model to the
@@ -71,10 +71,8 @@ was fitted by \code{autofitVariogram} and the sums of squares between the sample
 fitted variogram model. The attribute names are \code{krige_output}, \code{exp_var}, \code{var_model} 
 and \code{sserr} respectively.
 } 
-\references{}
-\note{}
 \author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
-\seealso{\code{\link{autofitVariogram}}, \code{\link[pkg:gstat]{krige}}}
+\seealso{\code{\link{autofitVariogram}}, \code{\link[gstat]{krige}}}
 \examples{
 # Data preparation
 data(meuse)

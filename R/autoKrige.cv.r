@@ -47,10 +47,24 @@ summary.autoKrige.cv = function(object, ...) {
 compare.cv = function(..., col.names, bubbleplots = FALSE, zcol = "residual", 
 						   layout, key.entries, reference = 1, plot.diff = FALSE) 
 # A function to compare cross-validations to each other in both statistics (using summary.autoKrige.cv) or
-# in bubble plots (using cv.compare.bubble).
+# in bubble plots (using cv.compare.bubble). '...' can be both output from krige.cv or autoKrige.cv.
 {
 	dots = list(...)
-	out = sapply(dots, summary)
+
+    # If a user passes output directly from krige.cv, change it to an autoKrige.cv object
+    dots = lapply(dots, function(x) { 
+            if(inherits(x, "autoKrige.cv")) {                   # autoKrige.cv output
+                return(x)
+            } else if(inherits(x, "SpatialPointsDataFrame")){   # krige.cv output
+                x = list(krige.cv_output = x)
+                class(x) = "autoKrige.cv"
+                return(x)
+            } else {                                            # unknown output
+                stop(sprintf("One of the objects in \'...\' has class \'%s\'. Class of objects in \'...\' should be one of \n  \'autoKrige.cv\' or \'SpatialPointsDataFrame\'", class(x)[1]))
+            }
+        })
+
+	out = do.call("cbind", lapply(dots, summary))
 	if(missing(col.names)) {
 		col.names = LETTERS[1:length(dots)]
 	}

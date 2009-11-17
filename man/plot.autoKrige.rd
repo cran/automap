@@ -14,11 +14,11 @@
 	\item{justPosition}{logical, if FALSE: not only the plot with the position of the prediction interval is plotted,
 			  but also plots with the upper and lower limits of the prediction interval.}
 	\item{main}{Title of the plot for the position of the prediction interval.}
-	\item{...}{arguments passed to lattice functions \link{xyplot} and \link[pkg:sp]{spplot}}
+	\item{...}{arguments passed to lattice functions \link[lattice]{xyplot} and \link[sp]{spplot}}
 }
-\details{For a detailed description of how \code{sp.layout} is constructed see \link[pkg:sp]{spplot}.}
+\details{For a detailed description of how \code{sp.layout} is constructed see \link[sp]{spplot}.}
 \author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
-\seealso{\code{\link[pkg:sp]{spplot}}, \code{\link{autoKrige}}, \code{\link{posPredictionInterval}} }
+\seealso{\code{\link[sp]{spplot}}, \code{\link{autoKrige}}, \code{\link{posPredictionInterval}} }
 \examples{
 # Ordinary kriging
 data(meuse)

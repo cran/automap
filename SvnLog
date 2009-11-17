@@ -1,4 +1,69 @@
 ------------------------------------------------------------------------
+r751 | paulhiemstra | 2009-11-17 10:42:53 +0100 (Tue, 17 Nov 2009) | 1 line
+Changed paths:
+   M /automap/man/autoKrige.rd
+   M /automap/man/autoKrige_cv.rd
+   M /automap/man/autofitVariogram.rd
+   M /automap/man/automapPlot.rd
+   M /automap/man/compare.cv.rd
+   M /automap/man/plot.autoKrige.rd
+   M /automap/man/posPredictionInterval.rd
+
+Changed to the new way of refrerring to another package (R 2.10.0)
+------------------------------------------------------------------------
+r750 | paulhiemstra | 2009-11-17 10:20:28 +0100 (Tue, 17 Nov 2009) | 1 line
+Changed paths:
+   M /automap/man/autoKrige_cv.rd
+
+Fixed a problem with referall to another package (pkg= replaced by pkg:)
+------------------------------------------------------------------------
+r749 | paulhiemstra | 2009-11-17 09:49:38 +0100 (Tue, 17 Nov 2009) | 1 line
+Changed paths:
+   M /automap/man/compare.cv.rd
+
+Deleted an empty details section
+------------------------------------------------------------------------
+r748 | paulhiemstra | 2009-11-17 09:48:14 +0100 (Tue, 17 Nov 2009) | 1 line
+Changed paths:
+   M /automap/tests/autoKrige.cv.Rout.save
+   M /automap/tests/automap.Rout.save
+
+Uploaded the latest version of the saved test results.
+------------------------------------------------------------------------
+r747 | paulhiemstra | 2009-11-17 09:42:50 +0100 (Tue, 17 Nov 2009) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+
+Updated to a new version
+------------------------------------------------------------------------
+r746 | paulhiemstra | 2009-11-17 09:39:45 +0100 (Tue, 17 Nov 2009) | 1 line
+Changed paths:
+   M /automap/R/autoKrige.r
+
+Added a check that checks if all the data in the column of input_data is all the same. If so, throw an exception
+------------------------------------------------------------------------
+r745 | paulhiemstra | 2009-11-17 09:38:46 +0100 (Tue, 17 Nov 2009) | 1 line
+Changed paths:
+   M /automap/man/compare.cv.rd
+
+Updated the documentation to add the option to pass the output of krige.cv to compare.cv
+------------------------------------------------------------------------
+r737 | paulhiemstra | 2009-10-26 14:57:04 +0100 (Mon, 26 Oct 2009) | 3 lines
+Changed paths:
+   M /automap/DESCRIPTION
+   M /automap/R/autoKrige.cv.r
+
+updated compare.cv:
+Fixed the bug that the rownames in the output of compare.cv (RMSE etc) is not retained.
+The input of compare.cv now also accepts the output from krige.cv and not only from autoKrige.cv
+------------------------------------------------------------------------
+r707 | edzer | 2009-09-28 09:53:31 +0200 (Mon, 28 Sep 2009) | 2 lines
+Changed paths:
+   M /automap/R/autokrige.vgm.panel.r
+
+added plotting of Kappa value if model is Mat or Ste
+
+------------------------------------------------------------------------
 r644 | paulhiemstra | 2009-07-10 14:57:30 +0200 (Fri, 10 Jul 2009) | 1 line
 Changed paths:
    M /automap/DESCRIPTION

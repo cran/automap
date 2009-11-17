@@ -2,7 +2,7 @@
 \alias{autoKrige.cv}
 \title{Automatic cross-validation}
 \description{Uses \code{\link{autofitVariogram}} to fit a variogram model to the data and then calls
-			 \code{\link[pkg=gstat]{krige.cv}} to perform cross-validation.}
+			 \code{\link[gstat]{krige.cv}} to perform cross-validation.}
 \usage{
 autoKrige.cv(formula, 
 	     input_data, 
@@ -22,7 +22,7 @@ autoKrige.cv(formula,
 				universal kriging, suppose 'z' is linearly dependent on 'x'
 				and 'y', use the formula 'z~x+y'.}
     \item{input_data}{An object of the 
-	            \link[pkg:sp]{SpatialPointsDataFrame-class} containing the data to be interpolated.}
+	            \link[sp]{SpatialPointsDataFrame-class} containing the data to be interpolated.}
     \item{data_variogram}{An optional way to provide a different dataset for
                 the building of the variogram.}
 	\item{model}{List of models that will be tested during automatic variogram fitting.}
@@ -34,15 +34,14 @@ autoKrige.cv(formula,
 	\item{verbose}{logical, if TRUE autoKrige will give extra information on the fitting process}
 	\item{GLS.model}{If a variogram model is passed on through this parameter a Generalized Least Squares 
 				 sample variogram is calculated.} 
-	\item{...}{arguments passed to \code{\link[pkg=gstat]{krige.cv}}}
+	\item{...}{arguments passed to \code{\link[gstat]{krige.cv}}}
 }
-\details{}
 \value{\code{autoKrige.cv} returns an object of class \code{autoKrige.cv}. This is a list
 		containing one object of class \code{SpatialPointsDataFrame} with the results of
-		the cross-validation, see \code{\link[pkg=gstat]{krige.cv}} for more details. The
+		the cross-validation, see \code{\link[gstat]{krige.cv}} for more details. The
 		attribute name is \code{krige.cv_output}.}
 \author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
-\seealso{\code{\link[pkg:gstat]{krige.cv}}, \code{\link{autofitVariogram}}, \code{\link{compare.cv}} }
+\seealso{\code{\link[gstat]{krige.cv}}, \code{\link{autofitVariogram}}, \code{\link{compare.cv}} }
 \examples{
 data(meuse)
 coordinates(meuse) = ~x+y

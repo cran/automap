@@ -31,6 +31,14 @@ autokrige.vgm.panel = function(x, y, model, subscripts,...)
               "\nRange: ",
               round(range, digits = no_digits(range)),
 			  sep = "")
+    if (model[2,"model"] %in% c("Mat", "Ste")) {
+		kappa = model[2,"kappa"]
+		txt = paste(txt,
+              "\nKappa: ",
+              round(kappa, digits = no_digits(kappa)), 
+			  sep = "")
+	}
+
 
     #ltext(max(x) - (0.06 * max(x)) , max(y) - 0.83 *max(y) ,txt,font = 2, cex = 0.7, adj = c(0,.5))
     ltext(max(x), 0.02 * max(y), txt, font = 2, cex = 0.7, adj = c(1,0), col = grey(.3))

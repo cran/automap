@@ -14,7 +14,7 @@ compare.cv(...,
 	   plot.diff = FALSE) 
 }
 \arguments{
-	\item{...}{\code{\link{autoKrige.cv}} objects that are compared to each other}
+	\item{...}{\code{\link{autoKrige.cv}} objects that are compared to each other. Also accepts the output form krige.cv, these objects are transformed to \code{\link{autoKrige.cv}} objects.}
 	\item{col.names}{Names for the different objects in \code{...}. This defaults to
 		\code{A} for the first object, \code{B} for the second, etc.}
 	\item{bubbleplots}{logical, if \code{TRUE} then bubble plots of the objects in \code{...} are
@@ -23,7 +23,7 @@ compare.cv(...,
 			are: \code{var1.pred}, \code{var1.var}, \code{observed}, \code{residual} and \code{zscore}.}
 	\item{layout}{\code{layout} of the bubbleplot, e.g. c(2,2). The argument gives the number of rows and columns
 			in which the set of bubbleplots is to be drawn. Useful defaults are selected.}
-	\item{key.entries}{A list of numbers telling what the key entries in the bubbleplots are. See \code{\link[pkg:sp]{bubble}} for more details.}
+	\item{key.entries}{A list of numbers telling what the key entries in the bubbleplots are. See \code{\link[sp]{bubble}} for more details.}
 	\item{reference}{An integer telling which of the objects should be taken as a reference if \code{plot.diff} equals TRUE. \code{reference}
 			equal to 1 means that the first object is the reference, \code{reference} equal to 2 means that the second object is the reference etc.}
 	\item{plot.diff}{logical, if \code{plot.diff} is TRUE the number specified in \code{reference} defines the CV object that is taken as a reference 
@@ -31,7 +31,6 @@ compare.cv(...,
 			worse than the reference, vice-versa for green. This is very useful to see where the differences between the results are spatially and if 
 			there is a pattern.}
 }
-\details{}
 \value{A data.frame with for each cross-validation result a number of diagnostics:
 % \describe{
 	\item{mean_error}{The mean of the cross-validation residual. Ideally small.}
@@ -45,7 +44,7 @@ compare.cv(...,
 % }
 }
 \author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
-\seealso{\code{\link[pkg:gstat]{krige.cv}}, \code{\link[pkg:sp]{bubble}}, \code{\link{autofitVariogram}}, \code{\link{autoKrige.cv}},  }
+\seealso{\code{\link[gstat]{krige.cv}}, \code{\link[sp]{bubble}}, \code{\link{autofitVariogram}}, \code{\link{autoKrige.cv}},  }
 \examples{
 # Load the data
 data(meuse)

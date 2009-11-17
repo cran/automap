@@ -3,8 +3,8 @@
 \title{Automatically fitting a variogram}
 \description{
 Automatically fitting a variogram to the data on which it is applied. The automatic fitting 
-is done through \link[pkg:gstat]{fit.variogram}. In \link[pkg:gstat]{fit.variogram} the user had to supply an initial estimate for the sill, 
-range etc. \code{autofitVariogram} provides this estimate based on the data and then calls \link[pkg:gstat]{fit.variogram}.}
+is done through \link[gstat]{fit.variogram}. In \link[gstat]{fit.variogram} the user had to supply an initial estimate for the sill, 
+range etc. \code{autofitVariogram} provides this estimate based on the data and then calls \link[gstat]{fit.variogram}.}
 \usage{autofitVariogram(formula, 
 		 input_data, 
 		 model = c("Sph", "Exp", "Gau", "Ste"),
@@ -19,7 +19,7 @@ range etc. \code{autofitVariogram} provides this estimate based on the data and 
 					'z~1'; for simple kriging also define 'beta' (see below); for
 		            universal kriging, suppose 'z' is linearly dependent on 'x'
 					and 'y', use the formula 'z~x+y'.}
-    \item{input_data}{An object of \link[pkg:sp]{SpatialPointsDataFrame-class}.}
+    \item{input_data}{An object of \link[sp]{SpatialPointsDataFrame-class}.}
     \item{model}{The list of variogrammodels that will be tested.}
     \item{kappa}{Smoothing parameter of the Matern model. Provide a list if you want to check
 				more than one value.}
@@ -57,7 +57,7 @@ the fitted variogram model and the sums of squares (\code{sserr}) between the sa
 fitted variogram model.}
 \note{\code{autofitVariogram} is mostly used indirectly through the function \code{autoKrige}}
 \author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
-\seealso{\code{\link[pkg:gstat]{fit.variogram}}, \code{\link{autoKrige}}, \code{\link{posPredictionInterval}}}
+\seealso{\code{\link[gstat]{fit.variogram}}, \code{\link{autoKrige}}, \code{\link{posPredictionInterval}}}
 \examples{
 data(meuse)
 coordinates(meuse) =~ x+y

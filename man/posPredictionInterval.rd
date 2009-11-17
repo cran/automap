@@ -14,7 +14,7 @@ higher, lower or not distinguishable.}
     \item{value}{The value to which the the \code{p}\% prediction interval compared}
 }
 \value{The output object is of class \code{posPredictionInterval} and contains the results
-of the function in an \link[pkg:sp]{Spatial-class} object similar to the one in the input object. This means that
+of the function in an \link[sp]{Spatial-class} object similar to the one in the input object. This means that
 if the input object containes a grid, the results are also returned on that same grid.
 Also included in the return object are the values for \code{p} and \code{value}. }
 \author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}

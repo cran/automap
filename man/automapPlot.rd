@@ -13,11 +13,11 @@ automapPlot(plot_data,
     \item{plot_data}{A spatial object that is to be plotted}
     \item{zcol}{The name of the column from \code{plot_data} you want to use. Can also be a list.}
 	\item{col.regions}{Choose a colors that specify the fill colours.}
- 	\item{...}{arguments that are passed on to \link[pkg:sp]{spplot}. A sp.layout object for example.}
+ 	\item{...}{arguments that are passed on to \link[sp]{spplot}. A sp.layout object for example.}
 }
 \details{A good function to calculate the position of the colorbreaks the \code{classIntervals} function from the \code{classInt} package.}
 \author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
-\seealso{\code{\link[pkg:classInt]{classIntervals}}, \code{\link[pkg:sp]{spplot}}, \code{\link{plot.autoKrige}}, \code{\link{plot.posPredictionInterval}} }
+\seealso{\code{\link[classInt]{classIntervals}}, \code{\link[sp]{spplot}}, \code{\link{plot.autoKrige}}, \code{\link{plot.posPredictionInterval}} }
 \examples{
 # Ordinary kriging
 data(meuse)

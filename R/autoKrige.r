@@ -33,6 +33,11 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
 
         }
     }
+
+    #browser()
+    # If all the values return an informative error
+    col_name = as.character(formula)[2]
+    if(length(unique(input_data[[col_name]])) == 1) stop(sprintf("All data in attribute \'%s\' is identical and equal to %s\n   Can not interpolate this data", col_name, unique(input_data[[col_name]])[1]))
     
 	if(missing(new_data)) new_data = create_new_data(input_data)
 
