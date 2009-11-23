@@ -11,7 +11,8 @@ range etc. \code{autofitVariogram} provides this estimate based on the data and 
 		 kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), 
 		 fix.values = c(NA,NA,NA),
 		 verbose = FALSE, 
-		 GLS.model = NA)}
+		 GLS.model = NA,
+         start_vals = c(NA,NA,NA))}
 \arguments{
 	\item{formula}{formula that defines the dependent variable as a linear model
 		            of independent variables; suppose the dependent variable has
@@ -25,11 +26,14 @@ range etc. \code{autofitVariogram} provides this estimate based on the data and 
 				more than one value.}
     \item{fix.values}{Can be used to fix a variogram parameter to a certain value. It 
                  consists of a list with a length of three. The items describe the
-                 fixed value for the nugget, range and sill respectively. Setting
-                 the value to NA means that the value is not fixed. } 
+                 fixed value for the nugget, range and sill respectively. They need to be given in that order. 
+                 Setting the value to NA means that the value is not fixed. } 
 	\item{verbose}{logical, if TRUE the function will give extra feedback on the fitting process}  
 	\item{GLS.model}{If a variogram model is passed on through this parameter a Generalized Least Squares 
 				 sample variogram is calculated.} 
+    \item{start_vals}{Can be used to give the starting values for the variogram fitting. The items describe the
+                 fixed value for the nugget, range and sill respectively. They need to be given in that order.
+                 Setting the value to NA means that the value will be automatically chosen.} 
 }
 \details{
 Geostatistical routines are used from package \code{gstat}.
@@ -51,6 +55,10 @@ A list of all permitted variogram models is available by typing vgm() into the R
 \code{autofitVariogram} iterates over the variogram models listed in \code{model} and picks the model 
 that has the smallest residual sum of squares with the sample variogram. For the Matern model, all the 
 kappa values in \code{kappa} are tested. 
+
+Note that when using the power model, and not specifying starting values yourself, the sill is set to 1, 
+the range to 1 and the nugget to 0. This is because the normal initial values for those paramters don't 
+work well with the power model. I consider this a temporary solution, any suggestions are appreciated.
 }
 \value{An object of type \code{autofitVariogram} is returned. This object contains the experimental variogram, 
 the fitted variogram model and the sums of squares (\code{sserr}) between the sample variogram and the

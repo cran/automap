@@ -1,6 +1,6 @@
 autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", "Ste"),
                                 kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), fix.values = c(NA,NA,NA),
-								verbose = FALSE, GLS.model = NA)
+								verbose = FALSE, GLS.model = NA, start_vals = c(NA,NA,NA))
 # This function automatically fits a variogram to input_data
 {
     # The boundaries could also be fitted automatically. This could be done by fitting
@@ -37,14 +37,27 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
 	}	
 	#experimental_variogram = experimental_variogram[experimental_variogram$np >5,] # FILTER!!!!! Clip points that have less then 5 point pairs
 
+    # If the value in start_vals == NA:
     # Automatically choosing the initial guess for fit.variogram
     # initial_sill = mean(max(semi_var) + median(semi-var))
     # initial_range = 0.10 * central axis of the area.
     # initial_nugget = minimum semi-variance value
-    initial_sill = mean(c(max(experimental_variogram$gamma), median(experimental_variogram$gamma)))
-    initial_nugget = min(experimental_variogram$gamma)
-    initial_range = (0.1*sqrt((max(x) - min(x))^2 + (max(y) - min(y))^2) )   # 0.10 times the length of the central axis through the area
-
+    if(is.na(start_vals[1])) {  # Nugget
+        initial_nugget = min(experimental_variogram$gamma)
+    } else {
+        initial_nugget = start_vals[1]
+    }
+    if(is.na(start_vals[2])) { # Range
+        initial_range = (0.1*sqrt((max(x) - min(x))^2 + (max(y) - min(y))^2) )   # 0.10 times the length of the central axis through the area
+    } else {
+        initial_range = start_vals[2]
+    }
+    if(is.na(start_vals[3])) { # Sill
+        initial_sill = mean(c(max(experimental_variogram$gamma), median(experimental_variogram$gamma)))
+    } else {
+        initial_sill = start_vals[3]
+    }
+    
     # Determine what should be automatically fitted and what should be fixed
     # Nugget
     if(!is.na(fix.values[1]))
@@ -73,6 +86,12 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
     getModel = function(psill, model, range, kappa, nugget, fit_range, fit_sill, fit_nugget, verbose)
     {
 		if(verbose) debug.level = 1 else debug.level = 0
+        if(model == "Pow") {
+            warning("Using the power model is at your own risk, read the docs of autofitVariogram for more details.")
+            if(is.na(start_vals[1])) nugget = 0
+            if(is.na(start_vals[2])) range = 1    # If a power mode, range == 1 is a better start value
+            if(is.na(start_vals[3])) sill = 1
+        }
         obj = try(fit.variogram(experimental_variogram,
                         model = vgm(psill=psill, model=model, range=range,
                                     nugget=nugget,kappa = kappa),
@@ -99,7 +118,6 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
 	counter = 1
 	
 	for(m in test_models) {
-		#cat("Trying", m, "...")
 		if(m != "Mat" && m != "Ste") {        # If not Matern and not Stein
 			model_fit = getModel(initial_sill - initial_nugget, m, initial_range, kappa = 0, initial_nugget, fit_range, fit_sill, fit_nugget, verbose = verbose)
 			if(!is.null(model_fit)) {	# skip models that failed
@@ -117,9 +135,6 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
 		}
 	}
 
-	# Delete entries in vgm_list and SSerr_list that do not have models in them because getModel returned an error
-	#SSerr_list = SSerr_list[!is.na(SSerr_list)]
-	
 	if(verbose) {
 		cat("Selected:\n")
 		print(vgm_list[[which.min(SSerr_list)]])
@@ -128,13 +143,8 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
 								kappa = sapply(vgm_list, function(x) as.character(x[2,4])), 
 								"SSerror" = SSerr_list)
 		tested = tested[order(tested$SSerror),]
-		#tested$"Frac" = (c(tested$SSerror, NA) - c(NA, tested$SSerror))[2:(length(tested$SSerror) + 1)] / c(tested$SSerror, NA)[2:length(tested$SSerror)]
 		print(tested)
 	}
-#cat("Deze\n")
-#print(GLS.coefs)
-	# Get rid of the variogram fits that failed
-	#vgm_list
 
 	result = list(exp_var = experimental_variogram, var_model = vgm_list[[which.min(SSerr_list)]], sserr = min(SSerr_list))
 	class(result) = c("autofitVariogram","list")    

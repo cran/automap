@@ -20,3 +20,6 @@ summary(kriging_result)
 # Block kriging
 kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid, block = c(400,400))
 summary(kriging_result)
+
+# Kriging with power model
+kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid, model = "Pow")

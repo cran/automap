@@ -14,6 +14,7 @@
 	  remove_duplicates = TRUE, 
 	  verbose = FALSE, 
 	  GLS.model = NA,
+      start_vals = c(NA,NA,NA),
 	  ...)}
 \arguments{
 	\item{formula}{formula that defines the dependent variable as a linear model
@@ -44,6 +45,9 @@
 	\item{verbose}{logical, if TRUE autoKrige will give extra information on the fitting process}
 	\item{GLS.model}{If a variogram model is passed on through this parameter a Generalized Least Squares 
 				 sample variogram is calculated.} 
+    \item{start_vals}{Can be used to give the starting values for the variogram fitting. The items describe the
+                 fixed value for the nugget, range and sill respectively. They need to be given in that order.
+                 Setting the value to NA means that the value will be automatically chosen.} 
 	\item{...}{arguments that are passed on to the gstat function \code{\link[gstat]{krige}}.}
 }
 \details{
@@ -64,6 +68,9 @@ This error is raised because 'gstat does use spherical distances when data are i
 coordinates, however the usual variogram models are typically not
 non-negative definite on the sphere, and no appropriate models are
 available' (Edzer Pebesma on r-sig-geo).
+
+When the user specifies the power model (\code{Pow}) as the model, the initial range is set to one. Note that
+when using the power model, the initial range is the initial power.
 }
 \value{This function returns an \code{autoKrige} object containing the results of the interpolation 
 (prediction, variance and standard deviation), the sample variogram, the variogram model that

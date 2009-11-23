@@ -1,4 +1,43 @@
 ------------------------------------------------------------------------
+r761 | paulhiemstra | 2009-11-23 16:09:34 +0100 (Mon, 23 Nov 2009) | 1 line
+Changed paths:
+   M /automap/R/autofitVariogram.r
+   M /automap/man/autofitVariogram.rd
+
+The user should be able to specify the starting values when using the power model. Added this to the code and the docs.
+------------------------------------------------------------------------
+r760 | paulhiemstra | 2009-11-23 16:02:31 +0100 (Mon, 23 Nov 2009) | 1 line
+Changed paths:
+   M /automap/tests/autoKrige.cv.Rout.save
+   M /automap/tests/automap.Rout.save
+
+New versions of the .Rout.save files
+------------------------------------------------------------------------
+r759 | paulhiemstra | 2009-11-23 15:57:29 +0100 (Mon, 23 Nov 2009) | 1 line
+Changed paths:
+   M /automap/R/autofitVariogram.r
+   M /automap/man/autofitVariogram.rd
+   M /automap/tests/automap.R
+
+Added some code to deal with people that use the power model. The normal initial values for the fitting procedure don't work well in that case. Needs improvement.
+------------------------------------------------------------------------
+r758 | paulhiemstra | 2009-11-23 15:20:58 +0100 (Mon, 23 Nov 2009) | 1 line
+Changed paths:
+   M /automap/DESCRIPTION
+   M /automap/R/autoKrige.r
+   M /automap/R/autofitVariogram.r
+   M /automap/man/autoKrige.rd
+   M /automap/man/autofitVariogram.rd
+
+Added functionality that allows the user to specify starting values for the variogram fitting instead of the defaults that automap chooses. Updated the new behaviour also in the docs and updated the version number of automap.
+------------------------------------------------------------------------
+r757 | paulhiemstra | 2009-11-23 15:18:57 +0100 (Mon, 23 Nov 2009) | 1 line
+Changed paths:
+   M /automap/man/autoKrige_cv.rd
+   M /automap/man/compare.cv.rd
+
+Set nfold = 10 in the examples to speed up the run time of the examples.
+------------------------------------------------------------------------
 r751 | paulhiemstra | 2009-11-17 10:42:53 +0100 (Tue, 17 Nov 2009) | 1 line
 Changed paths:
    M /automap/man/autoKrige.rd
