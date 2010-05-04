@@ -12,7 +12,8 @@ range etc. \code{autofitVariogram} provides this estimate based on the data and 
 		 fix.values = c(NA,NA,NA),
 		 verbose = FALSE, 
 		 GLS.model = NA,
-         start_vals = c(NA,NA,NA))}
+         start_vals = c(NA,NA,NA),
+         ...)}
 \arguments{
 	\item{formula}{formula that defines the dependent variable as a linear model
 		            of independent variables; suppose the dependent variable has
@@ -34,6 +35,7 @@ range etc. \code{autofitVariogram} provides this estimate based on the data and 
     \item{start_vals}{Can be used to give the starting values for the variogram fitting. The items describe the
                  fixed value for the nugget, range and sill respectively. They need to be given in that order.
                  Setting the value to NA means that the value will be automatically chosen.} 
+    \item{...}{parameters that are passed on to \link[gstat]{variogram} when calculating the sample variogram.}
 }
 \details{
 Geostatistical routines are used from package \code{gstat}.

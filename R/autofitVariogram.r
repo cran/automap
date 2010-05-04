@@ -1,6 +1,6 @@
 autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", "Ste"),
                                 kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), fix.values = c(NA,NA,NA),
-								verbose = FALSE, GLS.model = NA, start_vals = c(NA,NA,NA))
+								verbose = FALSE, GLS.model = NA, start_vals = c(NA,NA,NA), ...)
 # This function automatically fits a variogram to input_data
 {
     # The boundaries could also be fitted automatically. This could be done by fitting
@@ -16,11 +16,11 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
 
 	# If you specifiy a variogram model in GLS.model the Generelised least squares sample variogram is constructed
 	if(!is(GLS.model, "variogramModel")) {
-		experimental_variogram = variogram(formula, input_data,boundaries = boundaries)
+		experimental_variogram = variogram(formula, input_data,boundaries = boundaries, ...)
 	} else {
 		if(verbose) cat("Calculating GLS sample variogram\n")
 		g = gstat(NULL, "bla", formula, input_data, model = GLS.model, set = list(gls=1))
-		experimental_variogram = variogram(g, boundaries = boundaries)
+		experimental_variogram = variogram(g, boundaries = boundaries, ...)
 	}
 
 	# If there are bins with less than 5 point pairs we merge the first two bins and 
@@ -30,9 +30,9 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
 		if(length(experimental_variogram$np[experimental_variogram$np <5]) == 0 | length(boundaries) == 1) break
 		boundaries = boundaries[2:length(boundaries)]			
 		if(!is(GLS.model, "variogramModel")) {
-			experimental_variogram = variogram(formula, input_data,boundaries = boundaries)
+			experimental_variogram = variogram(formula, input_data,boundaries = boundaries, ...)
 		} else {
-			experimental_variogram = variogram(g, boundaries = boundaries)
+			experimental_variogram = variogram(g, boundaries = boundaries, ...)
 		}
 	}	
 	#experimental_variogram = experimental_variogram[experimental_variogram$np >5,] # FILTER!!!!! Clip points that have less then 5 point pairs
@@ -111,6 +111,7 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
 		} else return(obj)
     }
 
+
     # Automatically testing different models, the one with the smallest sums-of-squares is chosen
 	test_models = model
 	SSerr_list = c()
@@ -134,6 +135,19 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
 			}
 		}
 	}
+
+    # Check for negative values in sill or range coming from fit.variogram
+    # and NULL values in vgm_list, and remove those with a warning
+    strange_entries = sapply(vgm_list, function(v) any(c(v$psill, v$range) < 0) | is.null(v))
+    if(any(strange_entries)) {
+        if(verbose) {
+            print(vgm_list[strange_entries])
+            cat("^^^ ABOVE MODELS WERE REMOVED ^^^\n\n")
+        }
+        warning("Some models where removed for being either NULL or having a negative sill/range/nugget, \n\tset verbose == TRUE for more information")
+        SSerr_list = SSerr_list[!strange_entries]
+        vgm_list = vgm_list[!strange_entries]
+    }
 
 	if(verbose) {
 		cat("Selected:\n")

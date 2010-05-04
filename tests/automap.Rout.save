@@ -180,13 +180,13 @@ Grid attributes:
 x            178460       40        78
 y            329620       40       104
 Data attributes:
-   var1.pred          var1.var       var1.stdev    
- Min.   : -16.57   Min.   : 4731   Min.   : 68.78  
- 1st Qu.: 306.70   1st Qu.:16600   1st Qu.:128.84  
- Median : 490.62   Median :27297   Median :165.22  
- Mean   : 486.15   Mean   :30279   Mean   :166.89  
- 3rd Qu.: 657.17   3rd Qu.:38943   3rd Qu.:197.34  
- Max.   :1180.71   Max.   :87753   Max.   :296.23  
+   var1.pred           var1.var       var1.stdev    
+ Min.   :  -4.001   Min.   : 4870   Min.   : 69.78  
+ 1st Qu.: 319.267   1st Qu.:17000   1st Qu.:130.39  
+ Median : 503.192   Median :27761   Median :166.62  
+ Mean   : 498.722   Mean   :30744   Mean   :168.24  
+ 3rd Qu.: 669.738   3rd Qu.:39492   3rd Qu.:198.73  
+ Max.   :1193.276   Max.   :88803   Max.   :298.00  
 
 exp_var:
      np      dist    gamma dir.hor dir.ver   id
