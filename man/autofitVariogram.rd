@@ -90,4 +90,20 @@ data(meuse)
 coordinates(meuse) =~ x+y
 variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse)
 plot(variogram)
+
+# Settings additional fitting options
+variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse, 
+    miscFitOptions = list(merge.small.bins = FALSE))
+plot(variogram)
+
+# Settings the minimum number of pairs per bin quite high
+# to see the effect of merging bins
+variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse, 
+    miscFitOptions = list(min.np.bin = 500))
+plot(variogram)
+
+# ...and diable the merging, note the difference between the two plots
+variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse, 
+    miscFitOptions = list(min.np.bin = 500, merge.small.bins = FALSE))
+plot(variogram)
 }

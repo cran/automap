@@ -1,6 +1,6 @@
 
-R version 2.12.0 (2010-10-15)
-Copyright (C) 2010 The R Foundation for Statistical Computing
+R version 2.13.0 (2011-04-13)
+Copyright (C) 2011 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
 Platform: i686-pc-linux-gnu (32-bit)
 
@@ -16,6 +16,8 @@ Type 'demo()' for some demos, 'help()' for on-line help, or
 'help.start()' for an HTML browser interface to help.
 Type 'q()' to quit R.
 
+> options(digits=6)
+> 
 > library(automap)
 Loading required package: sp
 Loading required package: gstat
@@ -25,6 +27,60 @@ Loading required package: gstat
 > coordinates(meuse) =~ x+y
 > data(meuse.grid)
 > gridded(meuse.grid) =~ x+y
+> 
+> # Fitting some variograms
+> variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse, 
++     miscFitOptions = list(min.np.bin = 500))
+> variogram
+$exp_var
+    np     dist   gamma dir.hor dir.ver   id
+1  500  174.036 38065.2       0       0 var1
+2  711  337.604 50150.7       0       0 var1
+3  830  502.048 50347.6       0       0 var1
+4 1349  713.215 61255.3       0       0 var1
+5 1314  961.272 70311.9       0       0 var1
+6 1139 1213.412 75870.3       0       0 var1
+7 1355 1506.551 72043.9       0       0 var1
+
+$var_model
+  model    psill   range kappa
+1   Nug  5294.24    0.00   0.0
+2   Ste 91418.21 1781.65   0.2
+
+$sserr
+[1] 130690
+
+attr(,"class")
+[1] "autofitVariogram" "list"            
+> 
+> # ...and diable the merging, note the difference between the two plots
+> variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse, 
++     miscFitOptions = list(min.np.bin = 500, merge.small.bins = FALSE))
+> variogram
+$exp_var
+     np      dist   gamma dir.hor dir.ver   id
+1    17   59.3347 23959.6       0       0 var1
+2    36   86.0145 16671.6       0       0 var1
+3   114  131.0287 33270.3       0       0 var1
+4   149  176.1885 52846.3       0       0 var1
+5   184  226.7565 34555.3       0       0 var1
+6   711  337.6036 50150.7       0       0 var1
+7   830  502.0477 50347.6       0       0 var1
+8  1349  713.2149 61255.3       0       0 var1
+9  1314  961.2718 70311.9       0       0 var1
+10 1139 1213.4116 75870.3       0       0 var1
+11 1355 1506.5505 72043.9       0       0 var1
+
+$var_model
+  model    psill   range kappa
+1   Nug  2454.99   0.000   0.0
+2   Ste 68746.15 482.026   0.3
+
+$sserr
+[1] 2044182
+
+attr(,"class")
+[1] "autofitVariogram" "list"            
 > 
 > # Ordinary kriging
 > kriging_result = autoKrige(zinc~1, meuse, meuse.grid)
@@ -44,32 +100,32 @@ Grid attributes:
 x            178460       40        78
 y            329620       40       104
 Data attributes:
-   var1.pred         var1.var        var1.stdev   
- Min.   : 106.1   Min.   : 40440   Min.   :201.1  
- 1st Qu.: 207.1   1st Qu.: 49617   1st Qu.:222.7  
- Median : 309.4   Median : 55256   Median :235.1  
- Mean   : 406.2   Mean   : 62453   Mean   :247.5  
- 3rd Qu.: 555.1   3rd Qu.: 69014   3rd Qu.:262.7  
- Max.   :1620.1   Max.   :142357   Max.   :377.3  
+   var1.pred       var1.var        var1.stdev 
+ Min.   : 106   Min.   : 40440   Min.   :201  
+ 1st Qu.: 207   1st Qu.: 49617   1st Qu.:223  
+ Median : 309   Median : 55256   Median :235  
+ Mean   : 406   Mean   : 62453   Mean   :247  
+ 3rd Qu.: 555   3rd Qu.: 69014   3rd Qu.:263  
+ Max.   :1620   Max.   :142357   Max.   :377  
 
 exp_var:
-     np      dist     gamma dir.hor dir.ver   id
-1    17   59.3347  46207.03       0       0 var1
-2    36   86.0145  32203.57       0       0 var1
-3   114  131.0287  53862.70       0       0 var1
-4   149  176.1885  87068.48       0       0 var1
-5   184  226.7565  62486.31       0       0 var1
-6   711  337.6036 104453.77       0       0 var1
-7   830  502.0477 127330.49       0       0 var1
-8  1349  713.2149 150556.52       0       0 var1
-9  1314  961.2718 165153.58       0       0 var1
-10 1139 1213.4116 165495.97       0       0 var1
-11 1355 1506.5505 149245.86       0       0 var1
+     np      dist    gamma dir.hor dir.ver   id
+1    17   59.3347  46207.0       0       0 var1
+2    36   86.0145  32203.6       0       0 var1
+3   114  131.0287  53862.7       0       0 var1
+4   149  176.1885  87068.5       0       0 var1
+5   184  226.7565  62486.3       0       0 var1
+6   711  337.6036 104453.8       0       0 var1
+7   830  502.0477 127330.5       0       0 var1
+8  1349  713.2149 150556.5       0       0 var1
+9  1314  961.2718 165153.6       0       0 var1
+10 1139 1213.4116 165496.0       0       0 var1
+11 1355 1506.5505 149245.9       0       0 var1
 
 var_model:
-  model     psill    range kappa
-1   Nug  31957.45   0.0000   0.0
-2   Ste 133556.03 485.5088   1.1
+  model    psill   range kappa
+1   Nug  31957.4   0.000   0.0
+2   Ste 133556.0 485.509   1.1
 Sums of squares betw. var. model and sample var.[1] 4235991
 > pos = posPredictionInterval(kriging_result, 95, 75)
 > summary(pos)
@@ -86,13 +142,13 @@ Grid attributes:
 x            178460       40        78
 y            329620       40       104
 Data attributes:
-     upper            lower                        position   
- Min.   : 554.1   Min.   :-448.11   higher             : 717  
- 1st Qu.: 673.3   1st Qu.:-272.23   not distinguishable:2386  
- Median : 812.2   Median :-156.60                             
- Mean   : 891.3   Mean   : -78.90                             
- 3rd Qu.:1051.5   3rd Qu.:  50.58                             
- Max.   :2065.8   Max.   :1174.50                             
+     upper          lower                       position   
+ Min.   : 554   Min.   :-448.1   higher             : 717  
+ 1st Qu.: 673   1st Qu.:-272.2   not distinguishable:2386  
+ Median : 812   Median :-156.6                             
+ Mean   : 891   Mean   : -78.9                             
+ 3rd Qu.:1052   3rd Qu.:  50.6                             
+ Max.   :2066   Max.   :1174.5                             
 
 $p
 [1] 95
@@ -118,32 +174,32 @@ Grid attributes:
 x            178460       40        78
 y            329620       40       104
 Data attributes:
-   var1.pred         var1.var        var1.stdev   
- Min.   : 119.8   Min.   :  3295   Min.   : 57.4  
- 1st Qu.: 201.3   1st Qu.: 40754   1st Qu.:201.9  
- Median : 298.4   Median : 52571   Median :229.3  
- Mean   : 403.7   Mean   : 58014   Mean   :235.5  
- 3rd Qu.: 552.0   3rd Qu.: 71374   3rd Qu.:267.2  
- Max.   :1800.9   Max.   :141490   Max.   :376.2  
+   var1.pred       var1.var        var1.stdev   
+ Min.   : 120   Min.   :  3295   Min.   : 57.4  
+ 1st Qu.: 201   1st Qu.: 40754   1st Qu.:201.9  
+ Median : 298   Median : 52571   Median :229.3  
+ Mean   : 404   Mean   : 58014   Mean   :235.5  
+ 3rd Qu.: 552   3rd Qu.: 71374   3rd Qu.:267.2  
+ Max.   :1801   Max.   :141490   Max.   :376.2  
 
 exp_var:
-     np      dist     gamma dir.hor dir.ver   id
-1    17   59.3347  46207.03       0       0 var1
-2    36   86.0145  32203.57       0       0 var1
-3   114  131.0287  53862.70       0       0 var1
-4   149  176.1885  87068.48       0       0 var1
-5   184  226.7565  62486.31       0       0 var1
-6   711  337.6036 104453.77       0       0 var1
-7   830  502.0477 127330.49       0       0 var1
-8  1349  713.2149 150556.52       0       0 var1
-9  1314  961.2718 165153.58       0       0 var1
-10 1139 1213.4116 165495.97       0       0 var1
-11 1355 1506.5505 149245.86       0       0 var1
+     np      dist    gamma dir.hor dir.ver   id
+1    17   59.3347  46207.0       0       0 var1
+2    36   86.0145  32203.6       0       0 var1
+3   114  131.0287  53862.7       0       0 var1
+4   149  176.1885  87068.5       0       0 var1
+5   184  226.7565  62486.3       0       0 var1
+6   711  337.6036 104453.8       0       0 var1
+7   830  502.0477 127330.5       0       0 var1
+8  1349  713.2149 150556.5       0       0 var1
+9  1314  961.2718 165153.6       0       0 var1
+10 1139 1213.4116 165496.0       0       0 var1
+11 1355 1506.5505 149245.9       0       0 var1
 
 var_model:
-  model    psill    range kappa
-1   Nug      0.2   0.0000   0.0
-2   Ste 173886.7 567.4056   0.4
+  model    psill   range kappa
+1   Nug      0.2   0.000   0.0
+2   Ste 173886.7 567.406   0.4
 Sums of squares betw. var. model and sample var.[1] 4751276
 > pos = posPredictionInterval(kriging_result, 95, 75)
 > summary(pos)
@@ -160,13 +216,13 @@ Grid attributes:
 x            178460       40        78
 y            329620       40       104
 Data attributes:
-     upper            lower                        position   
- Min.   : 292.2   Min.   :-465.39   higher             : 759  
- 1st Qu.: 654.8   1st Qu.:-260.30   not distinguishable:2344  
- Median : 788.4   Median :-130.86                             
- Mean   : 865.1   Mean   : -57.81                             
- 3rd Qu.:1027.8   3rd Qu.:  70.00                             
- Max.   :2108.8   Max.   :1575.55                             
+     upper          lower                       position   
+ Min.   : 292   Min.   :-465.4   higher             : 759  
+ 1st Qu.: 655   1st Qu.:-260.3   not distinguishable:2344  
+ Median : 788   Median :-130.9                             
+ Mean   : 865   Mean   : -57.8                             
+ 3rd Qu.:1028   3rd Qu.:  70.0                             
+ Max.   :2109   Max.   :1575.5                             
 
 $p
 [1] 95
@@ -193,32 +249,32 @@ Grid attributes:
 x            178460       40        78
 y            329620       40       104
 Data attributes:
-   var1.pred          var1.var        var1.stdev   
- Min.   : -31.91   Min.   : 16191   Min.   :127.2  
- 1st Qu.: 308.28   1st Qu.: 43947   1st Qu.:209.6  
- Median : 483.07   Median : 56556   Median :237.8  
- Mean   : 495.43   Mean   : 59161   Mean   :239.5  
- 3rd Qu.: 654.43   3rd Qu.: 71202   3rd Qu.:266.8  
- Max.   :1586.57   Max.   :121944   Max.   :349.2  
+   var1.pred         var1.var        var1.stdev 
+ Min.   : -31.9   Min.   : 16191   Min.   :127  
+ 1st Qu.: 308.3   1st Qu.: 43947   1st Qu.:210  
+ Median : 483.1   Median : 56556   Median :238  
+ Mean   : 495.4   Mean   : 59161   Mean   :240  
+ 3rd Qu.: 654.4   3rd Qu.: 71202   3rd Qu.:267  
+ Max.   :1586.6   Max.   :121944   Max.   :349  
 
 exp_var:
-     np      dist    gamma dir.hor dir.ver   id
-1    17   59.3347 23959.65       0       0 var1
-2    36   86.0145 16671.65       0       0 var1
-3   114  131.0287 33270.31       0       0 var1
-4   149  176.1885 52846.33       0       0 var1
-5   184  226.7565 34555.29       0       0 var1
-6   711  337.6036 50150.73       0       0 var1
-7   830  502.0477 50347.61       0       0 var1
-8  1349  713.2149 61255.29       0       0 var1
-9  1314  961.2718 70311.91       0       0 var1
-10 1139 1213.4116 75870.33       0       0 var1
-11 1355 1506.5505 72043.88       0       0 var1
+     np      dist   gamma dir.hor dir.ver   id
+1    17   59.3347 23959.6       0       0 var1
+2    36   86.0145 16671.6       0       0 var1
+3   114  131.0287 33270.3       0       0 var1
+4   149  176.1885 52846.3       0       0 var1
+5   184  226.7565 34555.3       0       0 var1
+6   711  337.6036 50150.7       0       0 var1
+7   830  502.0477 50347.6       0       0 var1
+8  1349  713.2149 61255.3       0       0 var1
+9  1314  961.2718 70311.9       0       0 var1
+10 1139 1213.4116 75870.3       0       0 var1
+11 1355 1506.5505 72043.9       0       0 var1
 
 var_model:
-  model     psill    range kappa
-1   Nug  2454.994   0.0000   0.0
-2   Ste 68746.155 482.0264   0.3
+  model    psill   range kappa
+1   Nug  2454.99   0.000   0.0
+2   Ste 68746.15 482.026   0.3
 Sums of squares betw. var. model and sample var.[1] 2044182
 > pos = posPredictionInterval(kriging_result, 95, 75)
 > summary(pos)
@@ -235,13 +291,13 @@ Grid attributes:
 x            178460       40        78
 y            329620       40       104
 Data attributes:
-     upper            lower                         position   
- Min.   : 356.6   Min.   :-532.824   higher             :1147  
- 1st Qu.: 776.7   1st Qu.:-155.522   not distinguishable:1956  
- Median : 938.5   Median :   7.305                             
- Mean   : 964.9   Mean   :  25.990                             
- 3rd Qu.:1138.9   3rd Qu.: 185.449                             
- Max.   :1861.7   Max.   :1311.474                             
+     upper          lower                       position   
+ Min.   : 357   Min.   :-532.8   higher             :1147  
+ 1st Qu.: 777   1st Qu.:-155.5   not distinguishable:1956  
+ Median : 938   Median :   7.3                             
+ Mean   : 965   Mean   :  26.0                             
+ 3rd Qu.:1139   3rd Qu.: 185.4                             
+ Max.   :1862   Max.   :1311.5                             
 
 $p
 [1] 95
@@ -268,32 +324,32 @@ Grid attributes:
 x            178460       40        78
 y            329620       40       104
 Data attributes:
-   var1.pred           var1.var       var1.stdev    
- Min.   :  -4.001   Min.   : 4870   Min.   : 69.78  
- 1st Qu.: 319.267   1st Qu.:17000   1st Qu.:130.39  
- Median : 503.192   Median :27761   Median :166.62  
- Mean   : 498.722   Mean   :30744   Mean   :168.24  
- 3rd Qu.: 669.738   3rd Qu.:39492   3rd Qu.:198.73  
- Max.   :1193.276   Max.   :88803   Max.   :298.00  
+   var1.pred       var1.var       var1.stdev   
+ Min.   :  -4   Min.   : 4870   Min.   : 69.8  
+ 1st Qu.: 319   1st Qu.:17000   1st Qu.:130.4  
+ Median : 503   Median :27761   Median :166.6  
+ Mean   : 499   Mean   :30744   Mean   :168.2  
+ 3rd Qu.: 670   3rd Qu.:39492   3rd Qu.:198.7  
+ Max.   :1193   Max.   :88803   Max.   :298.0  
 
 exp_var:
-     np      dist    gamma dir.hor dir.ver   id
-1    17   59.3347 23959.65       0       0 var1
-2    36   86.0145 16671.65       0       0 var1
-3   114  131.0287 33270.31       0       0 var1
-4   149  176.1885 52846.33       0       0 var1
-5   184  226.7565 34555.29       0       0 var1
-6   711  337.6036 50150.73       0       0 var1
-7   830  502.0477 50347.61       0       0 var1
-8  1349  713.2149 61255.29       0       0 var1
-9  1314  961.2718 70311.91       0       0 var1
-10 1139 1213.4116 75870.33       0       0 var1
-11 1355 1506.5505 72043.88       0       0 var1
+     np      dist   gamma dir.hor dir.ver   id
+1    17   59.3347 23959.6       0       0 var1
+2    36   86.0145 16671.6       0       0 var1
+3   114  131.0287 33270.3       0       0 var1
+4   149  176.1885 52846.3       0       0 var1
+5   184  226.7565 34555.3       0       0 var1
+6   711  337.6036 50150.7       0       0 var1
+7   830  502.0477 50347.6       0       0 var1
+8  1349  713.2149 61255.3       0       0 var1
+9  1314  961.2718 70311.9       0       0 var1
+10 1139 1213.4116 75870.3       0       0 var1
+11 1355 1506.5505 72043.9       0       0 var1
 
 var_model:
-  model     psill    range kappa
-1   Nug  2454.994   0.0000   0.0
-2   Ste 68746.155 482.0264   0.3
+  model    psill   range kappa
+1   Nug  2454.99   0.000   0.0
+2   Ste 68746.15 482.026   0.3
 Sums of squares betw. var. model and sample var.[1] 2044182
 > pos = posPredictionInterval(kriging_result, 95, 75)
 > summary(pos)
@@ -310,13 +366,13 @@ Grid attributes:
 x            178460       40        78
 y            329620       40       104
 Data attributes:
-     upper            lower                        position   
- Min.   : 265.5   Min.   :-375.23   higher             :1913  
- 1st Qu.: 649.2   1st Qu.: -24.25   not distinguishable:1190  
- Median : 827.6   Median : 157.72                             
- Mean   : 828.5   Mean   : 168.97                             
- 3rd Qu.:1003.2   3rd Qu.: 343.52                             
- Max.   :1396.7   Max.   :1001.63                             
+     upper          lower                       position   
+ Min.   : 265   Min.   :-375.2   higher             :1913  
+ 1st Qu.: 649   1st Qu.: -24.2   not distinguishable:1190  
+ Median : 828   Median : 157.7                             
+ Mean   : 828   Mean   : 169.0                             
+ 3rd Qu.:1003   3rd Qu.: 343.5                             
+ Max.   :1397   Max.   :1001.6                             
 
 $p
 [1] 95
