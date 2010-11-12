@@ -1,7 +1,8 @@
 
-R version 2.10.0 (2009-10-26)
-Copyright (C) 2009 The R Foundation for Statistical Computing
+R version 2.12.0 (2010-10-15)
+Copyright (C) 2010 The R Foundation for Statistical Computing
 ISBN 3-900051-07-0
+Platform: i686-pc-linux-gnu (32-bit)
 
 R is free software and comes with ABSOLUTELY NO WARRANTY.
 You are welcome to redistribute it under certain conditions.
@@ -70,6 +71,35 @@ var_model:
 1   Nug  31957.45   0.0000   0.0
 2   Ste 133556.03 485.5088   1.1
 Sums of squares betw. var. model and sample var.[1] 4235991
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+     upper            lower                        position   
+ Min.   : 554.1   Min.   :-448.11   higher             : 717  
+ 1st Qu.: 673.3   1st Qu.:-272.23   not distinguishable:2386  
+ Median : 812.2   Median :-156.60                             
+ Mean   : 891.3   Mean   : -78.90                             
+ 3rd Qu.:1051.5   3rd Qu.:  50.58                             
+ Max.   :2065.8   Max.   :1174.50                             
+
+$p
+[1] 95
+
+$value
+[1] 75
+
 > 
 > kriging_result = autoKrige(zinc~1, meuse, meuse.grid, fix.values = c(0.2,NA,NA))
 [using ordinary kriging]
@@ -115,6 +145,35 @@ var_model:
 1   Nug      0.2   0.0000   0.0
 2   Ste 173886.7 567.4056   0.4
 Sums of squares betw. var. model and sample var.[1] 4751276
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+     upper            lower                        position   
+ Min.   : 292.2   Min.   :-465.39   higher             : 759  
+ 1st Qu.: 654.8   1st Qu.:-260.30   not distinguishable:2344  
+ Median : 788.4   Median :-130.86                             
+ Mean   : 865.1   Mean   : -57.81                             
+ 3rd Qu.:1027.8   3rd Qu.:  70.00                             
+ Max.   :2108.8   Max.   :1575.55                             
+
+$p
+[1] 95
+
+$value
+[1] 75
+
 > 
 > # Universal kriging
 > kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid)
@@ -161,6 +220,35 @@ var_model:
 1   Nug  2454.994   0.0000   0.0
 2   Ste 68746.155 482.0264   0.3
 Sums of squares betw. var. model and sample var.[1] 2044182
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+     upper            lower                         position   
+ Min.   : 356.6   Min.   :-532.824   higher             :1147  
+ 1st Qu.: 776.7   1st Qu.:-155.522   not distinguishable:1956  
+ Median : 938.5   Median :   7.305                             
+ Mean   : 964.9   Mean   :  25.990                             
+ 3rd Qu.:1138.9   3rd Qu.: 185.449                             
+ Max.   :1861.7   Max.   :1311.474                             
+
+$p
+[1] 95
+
+$value
+[1] 75
+
 > 
 > # Block kriging
 > kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid, block = c(400,400))
@@ -207,6 +295,35 @@ var_model:
 1   Nug  2454.994   0.0000   0.0
 2   Ste 68746.155 482.0264   0.3
 Sums of squares betw. var. model and sample var.[1] 2044182
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+     upper            lower                        position   
+ Min.   : 265.5   Min.   :-375.23   higher             :1913  
+ 1st Qu.: 649.2   1st Qu.: -24.25   not distinguishable:1190  
+ Median : 827.6   Median : 157.72                             
+ Mean   : 828.5   Mean   : 168.97                             
+ 3rd Qu.:1003.2   3rd Qu.: 343.52                             
+ Max.   :1396.7   Max.   :1001.63                             
+
+$p
+[1] 95
+
+$value
+[1] 75
+
 > 
 > # Kriging with power model
 > kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid, model = "Pow")

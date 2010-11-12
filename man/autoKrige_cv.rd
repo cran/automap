@@ -12,6 +12,8 @@ autoKrige.cv(formula,
 	     fix.values = c(NA,NA,NA), 
 	     verbose = FALSE, 
 	     GLS.model = NA,
+         start_vals = c(NA,NA,NA),
+         miscFitOptions = list(),
 	     ...)
 }
 \arguments{
@@ -34,6 +36,11 @@ autoKrige.cv(formula,
 	\item{verbose}{logical, if TRUE autoKrige will give extra information on the fitting process}
 	\item{GLS.model}{If a variogram model is passed on through this parameter a Generalized Least Squares 
 				 sample variogram is calculated.} 
+    \item{start_vals}{Can be used to give the starting values for the variogram fitting. The items describe the
+                 fixed value for the nugget, range and sill respectively. They need to be given in that order.
+                 Setting the value to NA means that the value will be automatically chosen.} 
+    \item{miscFitOptions}{Additional options to set the behavior of \link{autofitVariogram}. For details see the 
+                 documentation of \link{autofitVariogram}.}
 	\item{...}{arguments passed to \code{\link[gstat]{krige.cv}}}
 }
 \value{\code{autoKrige.cv} returns an object of class \code{autoKrige.cv}. This is a list

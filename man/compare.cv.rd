@@ -16,7 +16,7 @@ compare.cv(...,
 \arguments{
 	\item{...}{\code{\link{autoKrige.cv}} objects that are compared to each other. Also accepts the output form krige.cv, these objects are transformed to \code{\link{autoKrige.cv}} objects.}
 	\item{col.names}{Names for the different objects in \code{...}. This defaults to
-		\code{A} for the first object, \code{B} for the second, etc.}
+		the names of the objects in \code{...}.}
 	\item{bubbleplots}{logical, if \code{TRUE} then bubble plots of the objects in \code{...} are
 			drawn using the same value for the color breaks.}
 	\item{zcol}{Which column in the objects in \code{...} is going to be drawn in the bubbleplots. Options

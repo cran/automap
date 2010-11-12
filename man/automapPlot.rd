@@ -1,8 +1,7 @@
 \name{automapPlot}
 \alias{automapPlot}
 \title{Special plot function for automap}
-\description{This function wraps around spplot and creates a blue-to-whitish colorscale instead of the standard bpy colorscale.
-        The limits of the colorscale are calculated from the data using the classInt package.}
+\description{This function wraps around spplot and creates a blue-to-whitish colorscale instead of the standard bpy colorscale.}
 \usage{
 automapPlot(plot_data, 
 	    zcol,  
@@ -17,7 +16,7 @@ automapPlot(plot_data,
 }
 \details{A good function to calculate the position of the colorbreaks the \code{classIntervals} function from the \code{classInt} package.}
 \author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
-\seealso{\code{\link[classInt]{classIntervals}}, \code{\link[sp]{spplot}}, \code{\link{plot.autoKrige}}, \code{\link{plot.posPredictionInterval}} }
+\seealso{\code{\link[sp]{spplot}}, \code{\link{plot.autoKrige}}, \code{\link{plot.posPredictionInterval}} }
 \examples{
 # Ordinary kriging
 data(meuse)

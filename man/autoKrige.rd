@@ -15,6 +15,7 @@
 	  verbose = FALSE, 
 	  GLS.model = NA,
       start_vals = c(NA,NA,NA),
+      miscFitOptions = list(),
 	  ...)}
 \arguments{
 	\item{formula}{formula that defines the dependent variable as a linear model
@@ -48,6 +49,8 @@
     \item{start_vals}{Can be used to give the starting values for the variogram fitting. The items describe the
                  fixed value for the nugget, range and sill respectively. They need to be given in that order.
                  Setting the value to NA means that the value will be automatically chosen.} 
+    \item{miscFitOptions}{Additional options to set the behavior of \link{autofitVariogram}. For details see the 
+                 documentation of \link{autofitVariogram}.}
 	\item{...}{arguments that are passed on to the gstat function \code{\link[gstat]{krige}}.}
 }
 \details{

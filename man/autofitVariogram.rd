@@ -6,13 +6,14 @@ Automatically fitting a variogram to the data on which it is applied. The automa
 is done through \link[gstat]{fit.variogram}. In \link[gstat]{fit.variogram} the user had to supply an initial estimate for the sill, 
 range etc. \code{autofitVariogram} provides this estimate based on the data and then calls \link[gstat]{fit.variogram}.}
 \usage{autofitVariogram(formula, 
-		 input_data, 
-		 model = c("Sph", "Exp", "Gau", "Ste"),
-		 kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), 
-		 fix.values = c(NA,NA,NA),
-		 verbose = FALSE, 
-		 GLS.model = NA,
+         input_data, 
+         model = c("Sph", "Exp", "Gau", "Ste"),
+         kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), 
+         fix.values = c(NA,NA,NA),
+         verbose = FALSE, 
+         GLS.model = NA,
          start_vals = c(NA,NA,NA),
+         miscFitOptions = list(),
          ...)}
 \arguments{
 	\item{formula}{formula that defines the dependent variable as a linear model
@@ -35,6 +36,16 @@ range etc. \code{autofitVariogram} provides this estimate based on the data and 
     \item{start_vals}{Can be used to give the starting values for the variogram fitting. The items describe the
                  fixed value for the nugget, range and sill respectively. They need to be given in that order.
                  Setting the value to NA means that the value will be automatically chosen.} 
+    \item{miscFitOptions}{A list with named arguments that provide additional control over the fitting process. 
+                 For example: \code{list(merge.small.bins = TRUE)}. If the list is empty, autofitVariogram 
+                 uses default values. The following parameters can be set:
+                  \describe{ 
+                      \item{\code{merge.small.bins}:}{logical, when TRUE, the function checks if there are bins with less than 5 points. 
+                          If so, the first two bins are merged and the check is repeated. This is done until all bins have more 
+                          than \code{min.np.bin} points.}
+                      \item{\code{min.np.bin}:}{integer, the minimum number of points allowed in a bin before we start merging bins. 
+                          See also \code{merge.small.bins}.}
+                    }}
     \item{...}{parameters that are passed on to \link[gstat]{variogram} when calculating the sample variogram.}
 }
 \details{

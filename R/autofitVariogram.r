@@ -1,8 +1,13 @@
 autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", "Ste"),
                                 kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), fix.values = c(NA,NA,NA),
-								verbose = FALSE, GLS.model = NA, start_vals = c(NA,NA,NA), ...)
+								verbose = FALSE, GLS.model = NA, start_vals = c(NA,NA,NA), 
+                                miscFitOptions = list(),...)
 # This function automatically fits a variogram to input_data
 {
+    # Take the misc fit options and overwrite the defaults by the user specified ones
+    miscFitOptionsDefaults = list(merge.small.bins = TRUE, min.np.bin = 5)
+    miscFitOptions = modifyList(miscFitOptionsDefaults, miscFitOptions)
+
     # The boundaries could also be fitted automatically. This could be done by fitting
     # a function between lag-distance and bin-width. The fitting criterium could be
     # how good it looks but it is hard to put into formal language. A more simple approach
@@ -25,17 +30,20 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
 
 	# If there are bins with less than 5 point pairs we merge the first two bins and 
 	# rebuild the variogram and check again etc etc. This stops if no bins have less than
-	# 5 point pairs
-	while(TRUE) {
-		if(length(experimental_variogram$np[experimental_variogram$np <5]) == 0 | length(boundaries) == 1) break
-		boundaries = boundaries[2:length(boundaries)]			
-		if(!is(GLS.model, "variogramModel")) {
-			experimental_variogram = variogram(formula, input_data,boundaries = boundaries, ...)
-		} else {
-			experimental_variogram = variogram(g, boundaries = boundaries, ...)
-		}
-	}	
-	#experimental_variogram = experimental_variogram[experimental_variogram$np >5,] # FILTER!!!!! Clip points that have less then 5 point pairs
+	# 5 point pairs, request by Jon Skoien
+    if(miscFitOptions[["merge.small.bins"]]) {
+      if(verbose) cat("Checking if any bins have less than 5 points, merging bins when necessary...\n\n")
+      while(TRUE) {
+          if(length(experimental_variogram$np[experimental_variogram$np < miscFitOptions[["min.np.bin"]]]) == 0 | length(boundaries) == 1) break
+          boundaries = boundaries[2:length(boundaries)]			
+          if(!is(GLS.model, "variogramModel")) {
+              experimental_variogram = variogram(formula, input_data,boundaries = boundaries, ...)
+          } else {
+              experimental_variogram = variogram(g, boundaries = boundaries, ...)
+          }
+      }	
+    }
+      #experimental_variogram = experimental_variogram[experimental_variogram$np >5,] # FILTER!!!!! Clip points that have less then 5 point pairs
 
     # If the value in start_vals == NA:
     # Automatically choosing the initial guess for fit.variogram

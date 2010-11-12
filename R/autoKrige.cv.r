@@ -1,6 +1,7 @@
 autoKrige.cv = function(formula, input_data, data_variogram = input_data,
                           model = c("Sph", "Exp", "Gau", "Mat"), kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), 
-						  fix.values = c(NA,NA,NA), verbose = FALSE, GLS.model = NA,...)
+						  fix.values = c(NA,NA,NA), verbose = FALSE, GLS.model = NA,
+                          start_vals = c(NA,NA,NA), miscFitOptions = list(),...)
 # Automatically fits a variogram model to the data using autofitVariogram and performs
 # crossvalidation by calling krige.cv
 {
@@ -10,7 +11,9 @@ autoKrige.cv = function(formula, input_data, data_variogram = input_data,
 														kappa = kappa,
 														fix.values = fix.values,
 														verbose = verbose,
-														GLS.model = GLS.model)$var_model,
+														GLS.model = GLS.model,
+                                                        start_vals = start_vals,
+                                                        miscFitOptions = miscFitOptions)$var_model,
 														...)
 	kr.cv = list(krige.cv_output = kr.cv)
 	class(kr.cv) = "autoKrige.cv"
@@ -66,7 +69,7 @@ compare.cv = function(..., col.names, bubbleplots = FALSE, zcol = "residual",
 
 	out = do.call("cbind", lapply(dots, summary))
 	if(missing(col.names)) {
-		col.names = LETTERS[1:length(dots)]
+        col.names = as.character(as.list(match.call(expand.dots=TRUE))[-1])[1:length(dots)]
 	}
 	dimnames(out)[[2]] = col.names
 

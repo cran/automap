@@ -14,3 +14,5 @@ kr_dist_ffreq.cv = autoKrige.cv(log(zinc)~sqrt(dist)+ffreq,
 summary(kr.cv)
 summary(kr_dist.cv)
 summary(kr_dist_ffreq.cv)
+
+compare.cv(kr.cv, kr_dist.cv, kr_dist_ffreq.cv)

@@ -1,7 +1,7 @@
 Automap - An R package for automatic interpolation
 Paul Hiemstra, p.hiemstra@geo.uu.nl, intamap.geo.uu.nl/~paul
 
-For a list of changes in automap please check out the SvnLog file.
+For a list of changes in automap please check out the HgLog file.
 
 Automap automatically fits a variogram model to the data and interpolates using gstat.
 To get an idea about what automap can do, please start R, load automap and run the 

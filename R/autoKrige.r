@@ -1,7 +1,7 @@
 autoKrige = function(formula, input_data, new_data, data_variogram = input_data, block = 0,
                           model = c("Sph", "Exp", "Gau", "Ste"), kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), 
 						  fix.values = c(NA,NA,NA), remove_duplicates = TRUE, verbose = FALSE, GLS.model = NA,
-                          start_vals = c(NA,NA,NA), ...)
+                          start_vals = c(NA,NA,NA), miscFitOptions = list(), ...)
 # This function performs an automatic Kriging on the data in input_data
 {
 	if(inherits(formula, "SpatialPointsDataFrame"))
@@ -65,7 +65,8 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
                       fix.values = fix.values,
 					  verbose = verbose,
 					  GLS.model = GLS.model,
-                      start_vals = start_vals)
+                      start_vals = start_vals,
+                      miscFitOptions = miscFitOptions)
 
     ## Perform the interpolation
     krige_result = krige(formula,
