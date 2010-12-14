@@ -7,10 +7,10 @@
 autoKrige.cv(formula, 
 	     input_data, 
 	     data_variogram = input_data,
-	     model = c("Sph", "Exp", "Gau", "Mat"), 
+	     model = c("Sph", "Exp", "Gau", "Ste"), 
 	     kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), 
 	     fix.values = c(NA,NA,NA), 
-	     verbose = FALSE, 
+	     verbose = c(FALSE,TRUE), 
 	     GLS.model = NA,
          start_vals = c(NA,NA,NA),
          miscFitOptions = list(),
@@ -33,7 +33,9 @@ autoKrige.cv(formula,
                  consists of a list with a length of three. The items describe the
                  fixed value for the nugget, range and sill respectively. Setting
                  the value to NA means that the value is not fixed. Is passed on to autofitVariogram.}
-	\item{verbose}{logical, if TRUE autoKrige will give extra information on the fitting process}
+	\item{verbose}{vector of 2 logicals. The first element sets the verbosity of autofitVariogram, see its documentation
+                 for more information. The second element sets the verbosity level of krige.cv, see its documentation
+                 for more information.}
 	\item{GLS.model}{If a variogram model is passed on through this parameter a Generalized Least Squares 
 				 sample variogram is calculated.} 
     \item{start_vals}{Can be used to give the starting values for the variogram fitting. The items describe the

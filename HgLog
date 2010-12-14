@@ -1,6 +1,86 @@
-changeset:   93:439e9e3da8b9
+changeset:   106:9e603eccb8d0
 branch:      automap
 tag:         tip
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Tue Dec 21 10:26:33 2010 +0100
+summary:     Added tag v1.0-9 for changeset 970d75ae03cd
+
+changeset:   105:970d75ae03cd
+branch:      automap
+tag:         v1.0-9
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Tue Dec 21 10:26:19 2010 +0100
+summary:     Removed tag v1.0-9
+
+changeset:   104:a7dc89611aae
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Tue Dec 21 10:10:33 2010 +0100
+summary:     Tweaked the verbosity level of autoKrige.cv, now a vector of length
+
+changeset:   103:158a2dc80875
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Tue Dec 21 10:08:24 2010 +0100
+summary:     Added tag v1.0-9 for changeset ef062a0e2fd2
+
+changeset:   102:ef062a0e2fd2
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Wed Dec 15 14:24:30 2010 +0100
+summary:     Verbose argument is now also passed on to krige.cv
+
+changeset:   101:137fd7e55d33
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Wed Dec 15 14:24:10 2010 +0100
+summary:     Fixed bug in the ggplot of spatial cv residuals, updated examples.
+
+changeset:   100:37aa3c221921
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Mon Dec 06 14:55:26 2010 +0100
+summary:     Added an alternative plot for the cross-validation residuals
+
+changeset:   99:2a40e6586078
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Fri Dec 03 16:27:28 2010 +0100
+summary:     Update van de test results van autoKrige.cv
+
+changeset:   98:2a414e2ccc6c
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Fri Dec 03 14:17:29 2010 +0100
+summary:     Added more stats to summary.autoKrige.cv
+
+changeset:   97:a215840309e1
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Fri Dec 03 10:48:43 2010 +0100
+summary:     Bugfix: When the input of compare.cv was a list, the names
+
+changeset:   96:248cc6cad93d
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Fri Dec 03 10:26:29 2010 +0100
+summary:     Updating crossvalidation scripts:
+
+changeset:   95:5e60c6d8dbc9
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Fri Dec 03 08:53:25 2010 +0100
+summary:     Updated the version number to 1.0-9
+
+changeset:   94:2ebf75cfddba
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Mon Nov 22 10:49:09 2010 +0100
+summary:     Added tag v1.0-8 for changeset 439e9e3da8b9
+
+changeset:   93:439e9e3da8b9
+branch:      automap
+tag:         v1.0-8
 user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
 date:        Tue Nov 16 15:45:57 2010 +0100
 summary:     Update van de tests en test output bestanden:
