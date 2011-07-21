@@ -81,7 +81,7 @@ was fitted by \code{autofitVariogram} and the sums of squares between the sample
 fitted variogram model. The attribute names are \code{krige_output}, \code{exp_var}, \code{var_model} 
 and \code{sserr} respectively.
 } 
-\author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
+\author{Paul Hiemstra, \email{paul@numbertheory.nl}}
 \seealso{\code{\link{autofitVariogram}}, \code{\link[gstat]{krige}}}
 \examples{
 # Data preparation

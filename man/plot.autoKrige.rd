@@ -17,7 +17,7 @@
 	\item{...}{arguments passed to lattice functions \link[lattice]{xyplot} and \link[sp]{spplot}}
 }
 \details{For a detailed description of how \code{sp.layout} is constructed see \link[sp]{spplot}.}
-\author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
+\author{Paul Hiemstra, \email{paul@numbertheory.nl}}
 \seealso{\code{\link[sp]{spplot}}, \code{\link{autoKrige}}, \code{\link{posPredictionInterval}} }
 \examples{
 # Ordinary kriging

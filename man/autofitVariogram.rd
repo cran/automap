@@ -79,7 +79,7 @@ It is possible to pass anisotropy parameters to \code{autofitVariogram}. However
 the fitted variogram model and the sums of squares (\code{sserr}) between the sample variogram and the
 fitted variogram model.}
 \note{\code{autofitVariogram} is mostly used indirectly through the function \code{autoKrige}}
-\author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
+\author{Paul Hiemstra, \email{paul@numbertheory.nl}}
 \seealso{\code{\link[gstat]{fit.variogram}}, \code{\link{autoKrige}}, \code{\link{posPredictionInterval}}}
 \examples{
 data(meuse)

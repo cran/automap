@@ -49,7 +49,7 @@ autoKrige.cv(formula,
 		containing one object of class \code{SpatialPointsDataFrame} with the results of
 		the cross-validation, see \code{\link[gstat]{krige.cv}} for more details. The
 		attribute name is \code{krige.cv_output}.}
-\author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
+\author{Paul Hiemstra, \email{paul@numbertheory.nl}}
 \seealso{\code{\link[gstat]{krige.cv}}, \code{\link{autofitVariogram}}, \code{\link{compare.cv}} }
 \examples{
 data(meuse)

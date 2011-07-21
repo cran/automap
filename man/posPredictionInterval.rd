@@ -17,7 +17,7 @@ higher, lower or not distinguishable.}
 of the function in an \link[sp]{Spatial-class} object similar to the one in the input object. This means that
 if the input object containes a grid, the results are also returned on that same grid.
 Also included in the return object are the values for \code{p} and \code{value}. }
-\author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
+\author{Paul Hiemstra, \email{paul@numbertheory.nl}}
 \seealso{\code{\link{autoKrige}}, \code{\link{autofitVariogram}}}
 \examples{
 data(meuse)

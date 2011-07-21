@@ -1,6 +1,37 @@
-changeset:   112:54f02186b9ea
+changeset:   117:800dc66fcd35
 branch:      automap
 tag:         tip
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Wed Feb 08 13:08:43 2012 +0000
+summary:     Deleted some unnecessary comments
+
+changeset:   116:b7f31e4a4cc8
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Wed Feb 08 13:03:50 2012 +0000
+summary:     No using spDists to calculate the diagonal of the area, also
+
+changeset:   115:93af08ec37ca
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Fri Nov 11 08:50:47 2011 +0000
+summary:     - Small code change suggested by Pierre Roudier in create_new_data
+
+changeset:   114:2a74bb27e0e9
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Thu Jul 21 09:53:00 2011 +0000
+summary:     Updated version number to 1.0-12
+
+changeset:   113:f0773a9b56f1
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Thu Jul 21 09:51:36 2011 +0000
+summary:     Added tag v1.0-11 for changeset 54f02186b9ea
+
+changeset:   112:54f02186b9ea
+branch:      automap
+tag:         v1.0-11
 user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
 date:        Thu Jul 21 09:49:29 2011 +0000
 summary:     Added a warning when a users passes on anisotropy parameters to autofitVariogram.

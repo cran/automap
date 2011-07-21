@@ -55,7 +55,7 @@ compare.cv(...,
 	\item{iqr}{Interquartile Range of the residuals. Ideally small.}
 % }
 }
-\author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
+\author{Paul Hiemstra, \email{paul@numbertheory.nl}}
 \seealso{\code{\link[gstat]{krige.cv}}, \code{\link[sp]{bubble}}, \code{\link{autofitVariogram}}, \code{\link{autoKrige.cv}},  }
 \examples{
 # Load the data

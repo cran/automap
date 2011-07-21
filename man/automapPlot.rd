@@ -15,7 +15,7 @@ automapPlot(plot_data,
  	\item{...}{arguments that are passed on to \link[sp]{spplot}. A sp.layout object for example.}
 }
 \details{A good function to calculate the position of the colorbreaks the \code{classIntervals} function from the \code{classInt} package.}
-\author{Paul Hiemstra, \email{p.hiemstra@geo.uu.nl}}
+\author{Paul Hiemstra, \email{paul@numbertheory.nl}}
 \seealso{\code{\link[sp]{spplot}}, \code{\link{plot.autoKrige}}, \code{\link{plot.posPredictionInterval}} }
 \examples{
 # Ordinary kriging

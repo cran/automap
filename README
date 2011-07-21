@@ -1,5 +1,5 @@
 Automap - An R package for automatic interpolation
-Paul Hiemstra, p.hiemstra@geo.uu.nl, intamap.geo.uu.nl/~paul
+Paul Hiemstra, paul@numbertheory.nl, http://www.numbertheory.nl/
 
 For a list of changes in automap please check out the HgLog file.
 
@@ -16,5 +16,5 @@ I wish to thank Edzer Pebesma (author of gstat) and Jon Skoien for
 having very useful discussions with me during the development of automap and
 Arien Lam and Wiebe Nijland for test-driving the package and providing 
 suggestions and comments on the documentation. 
-In addition I would like to thank Mathieu Grelier for suggesting a useful
-feature to automap. 
+In addition I would like to thank Mathieu Grelier and Pierre Roudier 
+for providing useful comments on automap. 
