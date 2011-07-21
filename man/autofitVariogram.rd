@@ -72,6 +72,8 @@ kappa values in \code{kappa} are tested.
 Note that when using the power model, and not specifying starting values yourself, the sill is set to 1, 
 the range to 1 and the nugget to 0. This is because the normal initial values for those paramters don't 
 work well with the power model. I consider this a temporary solution, any suggestions are appreciated.
+
+It is possible to pass anisotropy parameters to \code{autofitVariogram}. However, \code{autofitVariogram} does not fit anisotropic variogram models. The function sees the anisotropic sample variogram as one big sample variogram. So it fits an average isotropic variogram model from the anisotropic sample variogram. A warning is issued when a users passes \code{alpha} to \code{autofitVariogram}.
 }
 \value{An object of type \code{autofitVariogram} is returned. This object contains the experimental variogram, 
 the fitted variogram model and the sums of squares (\code{sserr}) between the sample variogram and the
@@ -102,8 +104,16 @@ variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse,
     miscFitOptions = list(min.np.bin = 500))
 plot(variogram)
 
-# ...and diable the merging, note the difference between the two plots
+# ...and disable the merging, note the difference between the two plots
 variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse, 
     miscFitOptions = list(min.np.bin = 500, merge.small.bins = FALSE))
 plot(variogram)
+
+\dontrun{
+# An example of autofitVariogram with anisotropic sample variogram.
+# This is not supported, see details section.
+vm.isotropic = autofitVariogram(log(zinc) ~ dist, meuse)
+vm.anisotropic = autofitVariogram(log(zinc) ~ dist, meuse, alpha = c(0,45,90,135))
+}
+
 }

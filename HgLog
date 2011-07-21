@@ -1,6 +1,31 @@
-changeset:   108:886c3e76350c
+changeset:   112:54f02186b9ea
 branch:      automap
 tag:         tip
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Thu Jul 21 09:49:29 2011 +0000
+summary:     Added a warning when a users passes on anisotropy parameters to autofitVariogram.
+
+changeset:   111:9dbec64d0180
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Mon May 30 09:22:28 2011 +0000
+summary:     Updated version number to 1.0-11
+
+changeset:   110:ab8874aa7b9c
+branch:      automap
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Mon May 30 09:21:24 2011 +0000
+summary:     Added tag v1.0-10 for changeset 9d640dd6ead2
+
+changeset:   109:9d640dd6ead2
+branch:      automap
+tag:         v1.0-10
+user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
+date:        Mon May 30 09:18:35 2011 +0000
+summary:     Updated the test results (.Routput.save) in response to a
+
+changeset:   108:886c3e76350c
+branch:      automap
 user:        Paul Hiemstra <paul.hiemstra@knmi.nl>
 date:        Thu Jan 13 09:10:42 2011 +0100
 summary:     Added examples of miscFitOptions to the documentation of

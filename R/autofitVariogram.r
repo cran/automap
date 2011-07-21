@@ -4,6 +4,9 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
                                 miscFitOptions = list(),...)
 # This function automatically fits a variogram to input_data
 {
+    # Check for anisotropy parameters
+    if('alpha' %in% names(list(...))) warning('Anisotropic variogram model fitting not supported, see the documentation of autofitVariogram for more details.')
+
     # Take the misc fit options and overwrite the defaults by the user specified ones
     miscFitOptionsDefaults = list(merge.small.bins = TRUE, min.np.bin = 5)
     miscFitOptions = modifyList(miscFitOptionsDefaults, miscFitOptions)
