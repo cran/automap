@@ -85,6 +85,7 @@ and \code{sserr} respectively.
 \seealso{\code{\link{autofitVariogram}}, \code{\link[gstat]{krige}}}
 \examples{
 # Data preparation
+\dontrun{
 data(meuse)
 coordinates(meuse) =~ x+y
 data(meuse.grid)
@@ -107,7 +108,7 @@ plot(kriging_result)
 kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid)
 plot(kriging_result)
 
-# Block kriging
+# Block kriging  
 kriging_result_block = autoKrige(zinc~soil+ffreq+dist, 
 	meuse, meuse.grid, block = c(400,400))
 plot(kriging_result_block)
@@ -122,4 +123,5 @@ kr = autoKrige(zinc~dist, meuse.dup, meuse.grid)
 prediction_spdf = kr$krige_output
 sample_variogram = kr$exp_var
 variogram_model = kr$var_model
+}
 }

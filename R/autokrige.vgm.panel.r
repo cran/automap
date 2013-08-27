@@ -2,7 +2,7 @@
 autokrige.vgm.panel = function(x, y, model, subscripts,...)
 {
     # Call original gstat panel
-    gstat:::vgm.panel.xyplot(x, y, model = model, subscript = TRUE,...)
+    vgm.panel.xyplot(x, y, model = model, subscripts = TRUE,...)
 
     # Add the text.
     no_digits = function(a)

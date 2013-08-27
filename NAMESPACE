@@ -1,7 +1,7 @@
-import(methods)
 import(lattice)
 import(sp)
 import(gstat)
+import(reshape)
 
 export(autoKrige,
 	autofitVariogram,

@@ -4,12 +4,12 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
                           start_vals = c(NA,NA,NA), miscFitOptions = list(), ...)
 # This function performs an automatic Kriging on the data in input_data
 {
-	if(inherits(formula, "SpatialPointsDataFrame"))
-	# Is someone just passes a spatialpointsdataframe, assume he/she wants to interpolate the first column with Ordinary Kriging
-	{
-		input_data = formula
-		formula = as.formula(paste(names(input_data)[1], "~ 1"))
-	}
+  	if(inherits(formula, "SpatialPointsDataFrame"))
+  	# Is someone just passes a spatialpointsdataframe, assume he/she wants to interpolate the first column with Ordinary Kriging
+  	{
+  		input_data = formula
+  		formula = as.formula(paste(names(input_data)[1], "~ 1"))
+  	}
 
     # Check if inpu_data and data_variogram are SpatialPointsDataFrame
     if(!inherits(input_data,"SpatialPointsDataFrame") | !inherits(data_variogram,"SpatialPointsDataFrame"))
@@ -19,8 +19,10 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
                       "\n\tClass data_variogram: '",
                       class(data_variogram),"'",sep=''))
     }
-	if(as.character(formula)[3] != 1 & missing(new_data)) stop("If you want to use Universal Kriging, new_data needs to be specified \n  because the predictors are also required on the prediction locations.") 
-
+    
+  	if(as.character(formula)[3] != 1 & missing(new_data)) stop("If you want to use Universal Kriging, new_data needs to be specified \n  because the predictors are also required on the prediction locations.") 
+  	if("newdata" %in% names(list(...))) stop("The argument name for the prediction object is not 'newdata', but 'new_data'.")
+  	
     # Check if there are points or gridcells on the exact same coordinate and provide a more informative error message.
     # Points on the same spot causes the interpolation to crash.
     if(remove_duplicates) 
@@ -29,32 +31,31 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
         if(length(zd) != 0) 
         {
             warning("Removed ", length(zd) / 2, " duplicate observation(s) in input_data:", immediate. = TRUE)
-			print(input_data[c(zd), ])
+  		print(input_data[c(zd), ])
           	input_data = input_data[-zd[, 2], ]   
-
+  
         }
     }
 
-    #browser()
     # If all the values return an informative error
     col_name = as.character(formula)[2]
     if(length(unique(input_data[[col_name]])) == 1) stop(sprintf("All data in attribute \'%s\' is identical and equal to %s\n   Can not interpolate this data", col_name, unique(input_data[[col_name]])[1]))
     
-	if(missing(new_data)) new_data = create_new_data(input_data)
-
-	## Perform some checks on the projection systems of input_data and new_data
-	p4s_obj1 = proj4string(input_data)
- 	p4s_obj2 = proj4string(new_data)
-	if(!all(is.na(c(p4s_obj1, p4s_obj2)))) {
-		if(is.na(p4s_obj1) & !is.na(p4s_obj2)) proj4string(input_data) = proj4string(new_data)
-		if(!is.na(p4s_obj1) & is.na(p4s_obj2)) proj4string(new_data) = proj4string(input_data)
-		if(any(!c(is.projected(input_data), is.projected(new_data)))) stop(paste("Either input_data or new_data is in LongLat, please reproject.\n", 
-											"  input_data: ", p4s_obj1, "\n",
-											"  new_data:   ", p4s_obj2, "\n"))
-		if(proj4string(input_data) != proj4string(new_data)) stop(paste("Projections of input_data and new_data do not match:\n",
-											"  input_data: ", p4s_obj1, "\n",
-											"  new_data:    ", p4s_obj2, "\n"))
-	}
+  	if(missing(new_data)) new_data = create_new_data(input_data)
+  
+  	## Perform some checks on the projection systems of input_data and new_data
+  	p4s_obj1 = proj4string(input_data)
+   	p4s_obj2 = proj4string(new_data)
+  	if(!all(is.na(c(p4s_obj1, p4s_obj2)))) {
+  		if(is.na(p4s_obj1) & !is.na(p4s_obj2)) proj4string(input_data) = proj4string(new_data)
+  		if(!is.na(p4s_obj1) & is.na(p4s_obj2)) proj4string(new_data) = proj4string(input_data)
+  		if(any(!c(is.projected(input_data), is.projected(new_data)))) stop(paste("Either input_data or new_data is in LongLat, please reproject.\n", 
+  											"  input_data: ", p4s_obj1, "\n",
+  											"  new_data:   ", p4s_obj2, "\n"))
+  		if(proj4string(input_data) != proj4string(new_data)) stop(paste("Projections of input_data and new_data do not match:\n",
+  											"  input_data: ", p4s_obj1, "\n",
+  											"  new_data:    ", p4s_obj2, "\n"))
+  	}
 
     # Fit the variogram model, first check which model is used
     variogram_object = autofitVariogram(formula,
