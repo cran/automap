@@ -1,6 +1,6 @@
-63855aad0ef9cf821a87224b153aeb2b *DESCRIPTION
-560049b39cc49472c129df53e776348b *NAMESPACE
-bf6bc048bc04173de60766f99a4a1736 *R/autoKrige.cv.r
+477fb98ecf92267d87da1fd07fa747b9 *DESCRIPTION
+cc8c53f35742392ca83dcb5fdefe9354 *NAMESPACE
+1d8fbbcb1043034bc26534cce8267377 *R/autoKrige.cv.r
 66c9934db92cb7302cc2ec00512dbb81 *R/autoKrige.r
 fc41550a30bdc3e96f63c08f24a73675 *R/autofitVariogram.r
 8b7bb42cc8ab3f8e17df1137e5bf7307 *R/autokrige.vgm.panel.r

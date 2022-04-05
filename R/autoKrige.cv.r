@@ -155,7 +155,7 @@ cv.compare.bubble = function(objs, zcol, key.entries, layout, col.names, plot.di
 # Same as cv.compare.bubble, only now the plot is made using ggplot
 # instead of lattice. I find this version preferable.
 cv.compare.ggplot = function(objs, zcol = "residual", layout, col.names, addPoly = NULL) {
-  require(ggplot2, quietly = TRUE)
+#  requireNamespace(ggplot2, quietly = TRUE)
   objs = checkIfautokrige.cv(objs)
   if(!missing(col.names)) names(objs) = col.names
 
@@ -177,8 +177,8 @@ cv.compare.ggplot = function(objs, zcol = "residual", layout, col.names, addPoly
       scale_color_gradient2("Under- or \noverestimation", high = "green", low = "red", mid = "grey80") + 
       scale_size_continuous("Amount")
   if(!is.null(addPoly)) {
-    require(gpclib)
-    require(maptools)
+#    requireNamespace(gpclib)
+#    requireNamespace(maptools)
     if(inherits(addPoly, "SpatialPolygons")) addPoly = fortify(addPoly) else stop("addPoly should be SpatialPolygons* object")
     addPoly[[zcol]] = min(dat[[zcol]])
     addPoly[[zcol_abs]] = min(dat[[zcol_abs]])
