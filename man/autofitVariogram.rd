@@ -22,7 +22,8 @@ range etc. \code{autofitVariogram} provides this estimate based on the data and 
 					'z~1'; for simple kriging also define 'beta' (see below); for
 		            universal kriging, suppose 'z' is linearly dependent on 'x'
 					and 'y', use the formula 'z~x+y'.}
-    \item{input_data}{An object of \link[sp]{SpatialPointsDataFrame-class}.}
+    \item{input_data}{An object of \link[sp]{SpatialPointsDataFrame-class}
+                    or \link[sf]{sf} .}
     \item{model}{The list of variogrammodels that will be tested.}
     \item{kappa}{Smoothing parameter of the Matern model. Provide a list if you want to check
 				more than one value.}
@@ -82,6 +83,7 @@ fitted variogram model.}
 \author{Paul Hiemstra, \email{paul@numbertheory.nl}}
 \seealso{\code{\link[gstat]{fit.variogram}}, \code{\link{autoKrige}}, \code{\link{posPredictionInterval}}}
 \examples{
+library(sp)
 data(meuse)
 coordinates(meuse) =~ x+y
 variogram = autofitVariogram(zinc~1,meuse)
@@ -109,7 +111,7 @@ variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse,
     miscFitOptions = list(min.np.bin = 500, merge.small.bins = FALSE))
 plot(variogram)
 
-\dontrun{
+\donttest{
 # An example of autofitVariogram with anisotropic sample variogram.
 # This is not supported, see details section.
 vm.isotropic = autofitVariogram(log(zinc) ~ dist, meuse)

@@ -20,6 +20,7 @@ Also included in the return object are the values for \code{p} and \code{value}.
 \author{Paul Hiemstra, \email{paul@numbertheory.nl}}
 \seealso{\code{\link{autoKrige}}, \code{\link{autofitVariogram}}}
 \examples{
+library(sp)
 data(meuse)
 coordinates(meuse) =~ x+y
 data(meuse.grid)

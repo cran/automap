@@ -1,12 +1,13 @@
 import(lattice)
 import(sp)
+import(sf)
+import(stars)
 import(gstat)
 import(reshape)
 import(ggplot2)
-import(maptools)
-
+importFrom("graphics", "par")
 importFrom("grDevices", "chull", "grey")
-importFrom("methods", "is")
+importFrom("methods", "is", "as")
 importFrom("stats", "IQR", "as.formula", "cor", "median", "qnorm",
      "quantile", "sd")
 importFrom("utils", "modifyList")

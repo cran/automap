@@ -1,0 +1,661 @@
+
+R version 4.2.1 (2022-06-23 ucrt) -- "Funny-Looking Kid"
+Copyright (C) 2022 The R Foundation for Statistical Computing
+Platform: x86_64-w64-mingw32/x64 (64-bit)
+
+R is free software and comes with ABSOLUTELY NO WARRANTY.
+You are welcome to redistribute it under certain conditions.
+Type 'license()' or 'licence()' for distribution details.
+
+R is a collaborative project with many contributors.
+Type 'contributors()' for more information and
+'citation()' on how to cite R or R packages in publications.
+
+Type 'demo()' for some demos, 'help()' for on-line help, or
+'help.start()' for an HTML browser interface to help.
+Type 'q()' to quit R.
+
+> options(digits=6)
+> 
+> library(automap)
+> library(sp)
+Warning message:
+package 'sp' was built under R version 4.2.2 
+> library(sf)
+Linking to GEOS 3.9.3, GDAL 3.5.2, PROJ 8.2.1; sf_use_s2() is TRUE
+Warning message:
+package 'sf' was built under R version 4.2.2 
+> 
+> 
+> # Data preparation
+> data(meuse)
+> coordinates(meuse) =~ x+y
+> data(meuse.grid)
+> gridded(meuse.grid) =~ x+y
+> 
+> # Fitting some variograms
+> variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse, 
++     miscFitOptions = list(min.np.bin = 500))
+> variogram
+$exp_var
+    np     dist   gamma dir.hor dir.ver   id
+1  500  174.036 38065.2       0       0 var1
+2  711  337.604 50150.7       0       0 var1
+3  830  502.048 50347.6       0       0 var1
+4 1349  713.215 61255.3       0       0 var1
+5 1314  961.272 70311.9       0       0 var1
+6 1139 1213.412 75870.3       0       0 var1
+7 1355 1506.551 72043.9       0       0 var1
+
+$var_model
+  model    psill   range kappa
+1   Nug  5294.22    0.00   0.0
+2   Ste 91418.10 1781.65   0.2
+
+$sserr
+[1] 130690
+
+attr(,"class")
+[1] "autofitVariogram" "list"            
+> 
+> # ...and diable the merging, note the difference between the two plots
+> variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse, 
++     miscFitOptions = list(min.np.bin = 500, merge.small.bins = FALSE))
+> variogram
+$exp_var
+     np      dist   gamma dir.hor dir.ver   id
+1    17   59.3347 23959.6       0       0 var1
+2    36   86.0145 16671.6       0       0 var1
+3   114  131.0287 33270.3       0       0 var1
+4   149  176.1885 52846.3       0       0 var1
+5   184  226.7565 34555.3       0       0 var1
+6   711  337.6036 50150.7       0       0 var1
+7   830  502.0477 50347.6       0       0 var1
+8  1349  713.2149 61255.3       0       0 var1
+9  1314  961.2718 70311.9       0       0 var1
+10 1139 1213.4116 75870.3       0       0 var1
+11 1355 1506.5505 72043.9       0       0 var1
+
+$var_model
+  model    psill   range kappa
+1   Nug  2454.94   0.000   0.0
+2   Ste 68746.15 482.025   0.3
+
+$sserr
+[1] 2044182
+
+attr(,"class")
+[1] "autofitVariogram" "list"            
+> 
+> # Ordinary kriging
+> kriging_result = autoKrige(zinc~1, meuse, meuse.grid)
+[using ordinary kriging]
+> summary(kriging_result)
+krige_output:
+Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+   var1.pred       var1.var        var1.stdev 
+ Min.   : 106   Min.   : 40440   Min.   :201  
+ 1st Qu.: 207   1st Qu.: 49617   1st Qu.:223  
+ Median : 309   Median : 55256   Median :235  
+ Mean   : 406   Mean   : 62453   Mean   :247  
+ 3rd Qu.: 555   3rd Qu.: 69014   3rd Qu.:263  
+ Max.   :1620   Max.   :142357   Max.   :377  
+
+exp_var:
+     np      dist    gamma dir.hor dir.ver   id
+1    17   59.3347  46207.0       0       0 var1
+2    36   86.0145  32203.6       0       0 var1
+3   114  131.0287  53862.7       0       0 var1
+4   149  176.1885  87068.5       0       0 var1
+5   184  226.7565  62486.3       0       0 var1
+6   711  337.6036 104453.8       0       0 var1
+7   830  502.0477 127330.5       0       0 var1
+8  1349  713.2149 150556.5       0       0 var1
+9  1314  961.2718 165153.6       0       0 var1
+10 1139 1213.4116 165496.0       0       0 var1
+11 1355 1506.5505 149245.9       0       0 var1
+
+var_model:
+  model    psill   range kappa
+1   Nug  31957.6   0.000   0.0
+2   Ste 133556.2 485.511   1.1
+Sums of squares betw. var. model and sample var.[1] 4235991
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+     upper          lower                       position   
+ Min.   : 554   Min.   :-448.1   higher             : 717  
+ 1st Qu.: 673   1st Qu.:-272.2   not distinguishable:2386  
+ Median : 812   Median :-156.6                             
+ Mean   : 891   Mean   : -78.9                             
+ 3rd Qu.:1052   3rd Qu.:  50.6                             
+ Max.   :2066   Max.   :1174.5                             
+
+$p
+[1] 95
+
+$value
+[1] 75
+
+> 
+> kriging_result = autoKrige(zinc~1, meuse, meuse.grid, fix.values = c(0.2,NA,NA))
+[using ordinary kriging]
+> summary(kriging_result)
+krige_output:
+Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+   var1.pred       var1.var        var1.stdev   
+ Min.   : 120   Min.   :  3295   Min.   : 57.4  
+ 1st Qu.: 201   1st Qu.: 40754   1st Qu.:201.9  
+ Median : 298   Median : 52570   Median :229.3  
+ Mean   : 404   Mean   : 58013   Mean   :235.4  
+ 3rd Qu.: 552   3rd Qu.: 71374   3rd Qu.:267.2  
+ Max.   :1801   Max.   :141490   Max.   :376.2  
+
+exp_var:
+     np      dist    gamma dir.hor dir.ver   id
+1    17   59.3347  46207.0       0       0 var1
+2    36   86.0145  32203.6       0       0 var1
+3   114  131.0287  53862.7       0       0 var1
+4   149  176.1885  87068.5       0       0 var1
+5   184  226.7565  62486.3       0       0 var1
+6   711  337.6036 104453.8       0       0 var1
+7   830  502.0477 127330.5       0       0 var1
+8  1349  713.2149 150556.5       0       0 var1
+9  1314  961.2718 165153.6       0       0 var1
+10 1139 1213.4116 165496.0       0       0 var1
+11 1355 1506.5505 149245.9       0       0 var1
+
+var_model:
+  model    psill   range kappa
+1   Nug      0.2   0.000   0.0
+2   Ste 173889.1 567.423   0.4
+Sums of squares betw. var. model and sample var.[1] 4751276
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+     upper          lower                       position   
+ Min.   : 292   Min.   :-465.4   higher             : 759  
+ 1st Qu.: 655   1st Qu.:-260.3   not distinguishable:2344  
+ Median : 788   Median :-130.9                             
+ Mean   : 865   Mean   : -57.8                             
+ 3rd Qu.:1028   3rd Qu.:  70.0                             
+ Max.   :2109   Max.   :1575.5                             
+
+$p
+[1] 95
+
+$value
+[1] 75
+
+> 
+> # Universal kriging
+> kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid)
+[using universal kriging]
+> summary(kriging_result)
+krige_output:
+Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+   var1.pred       var1.var       var1.stdev   
+ Min.   :-181   Min.   : 9538   Min.   : 97.7  
+ 1st Qu.: 114   1st Qu.:29049   1st Qu.:170.4  
+ Median : 259   Median :34707   Median :186.3  
+ Mean   : 345   Mean   :36358   Mean   :188.7  
+ 3rd Qu.: 521   3rd Qu.:42945   3rd Qu.:207.2  
+ Max.   :1728   Max.   :67434   Max.   :259.7  
+
+exp_var:
+     np      dist   gamma dir.hor dir.ver   id
+1    17   59.3347 23959.6       0       0 var1
+2    36   86.0145 16671.6       0       0 var1
+3   114  131.0287 33270.3       0       0 var1
+4   149  176.1885 52846.3       0       0 var1
+5   184  226.7565 34555.3       0       0 var1
+6   711  337.6036 50150.7       0       0 var1
+7   830  502.0477 50347.6       0       0 var1
+8  1349  713.2149 61255.3       0       0 var1
+9  1314  961.2718 70311.9       0       0 var1
+10 1139 1213.4116 75870.3       0       0 var1
+11 1355 1506.5505 72043.9       0       0 var1
+
+var_model:
+  model    psill   range kappa
+1   Nug  2454.94   0.000   0.0
+2   Ste 68746.15 482.025   0.3
+Sums of squares betw. var. model and sample var.[1] 2044182
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+     upper          lower                       position   
+ Min.   : 166   Min.   :-662.8   higher             : 933  
+ 1st Qu.: 481   1st Qu.:-249.0   not distinguishable:2170  
+ Median : 610   Median : -90.7                             
+ Mean   : 715   Mean   : -25.1                             
+ 3rd Qu.: 912   3rd Qu.: 140.1                             
+ Max.   :1970   Max.   :1485.5                             
+
+$p
+[1] 95
+
+$value
+[1] 75
+
+> 
+> # Block kriging
+> kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid, block = c(400,400))
+[using universal kriging]
+> summary(kriging_result)
+krige_output:
+Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+   var1.pred       var1.var       var1.stdev   
+ Min.   :-190   Min.   : 2251   Min.   : 47.4  
+ 1st Qu.: 112   1st Qu.: 4680   1st Qu.: 68.4  
+ Median : 283   Median : 6688   Median : 81.8  
+ Mean   : 348   Mean   : 8516   Mean   : 88.6  
+ 3rd Qu.: 536   3rd Qu.:10855   3rd Qu.:104.2  
+ Max.   :1338   Max.   :29401   Max.   :171.5  
+
+exp_var:
+     np      dist   gamma dir.hor dir.ver   id
+1    17   59.3347 23959.6       0       0 var1
+2    36   86.0145 16671.6       0       0 var1
+3   114  131.0287 33270.3       0       0 var1
+4   149  176.1885 52846.3       0       0 var1
+5   184  226.7565 34555.3       0       0 var1
+6   711  337.6036 50150.7       0       0 var1
+7   830  502.0477 50347.6       0       0 var1
+8  1349  713.2149 61255.3       0       0 var1
+9  1314  961.2718 70311.9       0       0 var1
+10 1139 1213.4116 75870.3       0       0 var1
+11 1355 1506.5505 72043.9       0       0 var1
+
+var_model:
+  model    psill   range kappa
+1   Nug  2454.94   0.000   0.0
+2   Ste 68746.15 482.025   0.3
+Sums of squares betw. var. model and sample var.[1] 2044182
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:Object of class SpatialPixelsDataFrame
+Coordinates:
+     min    max
+x 178440 181560
+y 329600 333760
+Is projected: NA 
+proj4string : [NA]
+Number of points: 3103
+Grid attributes:
+  cellcentre.offset cellsize cells.dim
+x            178460       40        78
+y            329620       40       104
+Data attributes:
+     upper          lower                       position   
+ Min.   :  24   Min.   :-490.6   higher             :1790  
+ 1st Qu.: 277   1st Qu.: -47.5   lower              : 107  
+ Median : 433   Median : 131.8   not distinguishable:1206  
+ Mean   : 522   Mean   : 174.4                             
+ 3rd Qu.: 733   3rd Qu.: 359.4                             
+ Max.   :1480   Max.   :1196.4                             
+
+$p
+[1] 95
+
+$value
+[1] 75
+
+> 
+> # Kriging with power model
+> kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid, model = "Pow")
+[using universal kriging]
+Warning message:
+In getModel(initial_sill - initial_nugget, m, initial_range, kappa = 0,  :
+  Using the power model is at your own risk, read the docs of autofitVariogram for more details.
+> 
+> 
+> 
+> # Testing with sf objects
+> meuse = as(meuse, "sf")
+> meuse.grid = as(meuse.grid, "sf")
+> 
+> # Fitting some variograms
+> variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse, 
++                              miscFitOptions = list(min.np.bin = 500))
+> variogram
+$exp_var
+    np     dist   gamma dir.hor dir.ver   id
+1  500  174.036 38065.2       0       0 var1
+2  711  337.604 50150.7       0       0 var1
+3  830  502.048 50347.6       0       0 var1
+4 1349  713.215 61255.3       0       0 var1
+5 1314  961.272 70311.9       0       0 var1
+6 1139 1213.412 75870.3       0       0 var1
+7 1355 1506.551 72043.9       0       0 var1
+
+$var_model
+  model    psill   range kappa
+1   Nug  5294.22    0.00   0.0
+2   Ste 91418.10 1781.65   0.2
+
+$sserr
+[1] 130690
+
+attr(,"class")
+[1] "autofitVariogram" "list"            
+> 
+> # ...and diable the merging, note the difference between the two plots
+> variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse, 
++                              miscFitOptions = list(min.np.bin = 500, merge.small.bins = FALSE))
+> variogram
+$exp_var
+     np      dist   gamma dir.hor dir.ver   id
+1    17   59.3347 23959.6       0       0 var1
+2    36   86.0145 16671.6       0       0 var1
+3   114  131.0287 33270.3       0       0 var1
+4   149  176.1885 52846.3       0       0 var1
+5   184  226.7565 34555.3       0       0 var1
+6   711  337.6036 50150.7       0       0 var1
+7   830  502.0477 50347.6       0       0 var1
+8  1349  713.2149 61255.3       0       0 var1
+9  1314  961.2718 70311.9       0       0 var1
+10 1139 1213.4116 75870.3       0       0 var1
+11 1355 1506.5505 72043.9       0       0 var1
+
+$var_model
+  model    psill   range kappa
+1   Nug  2454.94   0.000   0.0
+2   Ste 68746.15 482.025   0.3
+
+$sserr
+[1] 2044182
+
+attr(,"class")
+[1] "autofitVariogram" "list"            
+> 
+> # Ordinary kriging
+> kriging_result = autoKrige(zinc~1, meuse, meuse.grid)
+[using ordinary kriging]
+> summary(kriging_result)
+krige_output:
+   var1.pred       var1.var         geometry      var1.stdev 
+ Min.   : 106   Min.   : 40440   POINT  :3103   Min.   :201  
+ 1st Qu.: 207   1st Qu.: 49617   epsg:NA:   0   1st Qu.:223  
+ Median : 309   Median : 55256                  Median :235  
+ Mean   : 406   Mean   : 62453                  Mean   :247  
+ 3rd Qu.: 555   3rd Qu.: 69014                  3rd Qu.:263  
+ Max.   :1620   Max.   :142357                  Max.   :377  
+
+exp_var:
+     np      dist    gamma dir.hor dir.ver   id
+1    17   59.3347  46207.0       0       0 var1
+2    36   86.0145  32203.6       0       0 var1
+3   114  131.0287  53862.7       0       0 var1
+4   149  176.1885  87068.5       0       0 var1
+5   184  226.7565  62486.3       0       0 var1
+6   711  337.6036 104453.8       0       0 var1
+7   830  502.0477 127330.5       0       0 var1
+8  1349  713.2149 150556.5       0       0 var1
+9  1314  961.2718 165153.6       0       0 var1
+10 1139 1213.4116 165496.0       0       0 var1
+11 1355 1506.5505 149245.9       0       0 var1
+
+var_model:
+  model    psill   range kappa
+1   Nug  31957.6   0.000   0.0
+2   Ste 133556.2 485.511   1.1
+Sums of squares betw. var. model and sample var.[1] 4235991
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:     upper          lower                       position       geometry   
+ Min.   : 554   Min.   :-448.1   higher             : 717   POINT  :3103  
+ 1st Qu.: 673   1st Qu.:-272.2   not distinguishable:2386   epsg:NA:   0  
+ Median : 812   Median :-156.6                                            
+ Mean   : 891   Mean   : -78.9                                            
+ 3rd Qu.:1052   3rd Qu.:  50.6                                            
+ Max.   :2066   Max.   :1174.5                                            
+
+$p
+[1] 95
+
+$value
+[1] 75
+
+> 
+> kriging_result = autoKrige(zinc~1, meuse, meuse.grid, fix.values = c(0.2,NA,NA))
+[using ordinary kriging]
+> summary(kriging_result)
+krige_output:
+   var1.pred       var1.var         geometry      var1.stdev   
+ Min.   : 120   Min.   :  3295   POINT  :3103   Min.   : 57.4  
+ 1st Qu.: 201   1st Qu.: 40754   epsg:NA:   0   1st Qu.:201.9  
+ Median : 298   Median : 52570                  Median :229.3  
+ Mean   : 404   Mean   : 58013                  Mean   :235.4  
+ 3rd Qu.: 552   3rd Qu.: 71374                  3rd Qu.:267.2  
+ Max.   :1801   Max.   :141490                  Max.   :376.2  
+
+exp_var:
+     np      dist    gamma dir.hor dir.ver   id
+1    17   59.3347  46207.0       0       0 var1
+2    36   86.0145  32203.6       0       0 var1
+3   114  131.0287  53862.7       0       0 var1
+4   149  176.1885  87068.5       0       0 var1
+5   184  226.7565  62486.3       0       0 var1
+6   711  337.6036 104453.8       0       0 var1
+7   830  502.0477 127330.5       0       0 var1
+8  1349  713.2149 150556.5       0       0 var1
+9  1314  961.2718 165153.6       0       0 var1
+10 1139 1213.4116 165496.0       0       0 var1
+11 1355 1506.5505 149245.9       0       0 var1
+
+var_model:
+  model    psill   range kappa
+1   Nug      0.2   0.000   0.0
+2   Ste 173889.1 567.423   0.4
+Sums of squares betw. var. model and sample var.[1] 4751276
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:     upper          lower                       position       geometry   
+ Min.   : 292   Min.   :-465.4   higher             : 759   POINT  :3103  
+ 1st Qu.: 655   1st Qu.:-260.3   not distinguishable:2344   epsg:NA:   0  
+ Median : 788   Median :-130.9                                            
+ Mean   : 865   Mean   : -57.8                                            
+ 3rd Qu.:1028   3rd Qu.:  70.0                                            
+ Max.   :2109   Max.   :1575.5                                            
+
+$p
+[1] 95
+
+$value
+[1] 75
+
+> 
+> # Universal kriging
+> kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid)
+[using universal kriging]
+> summary(kriging_result)
+krige_output:
+   var1.pred       var1.var        geometry      var1.stdev   
+ Min.   :-181   Min.   : 9538   POINT  :3103   Min.   : 97.7  
+ 1st Qu.: 114   1st Qu.:29049   epsg:NA:   0   1st Qu.:170.4  
+ Median : 259   Median :34707                  Median :186.3  
+ Mean   : 345   Mean   :36358                  Mean   :188.7  
+ 3rd Qu.: 521   3rd Qu.:42945                  3rd Qu.:207.2  
+ Max.   :1728   Max.   :67434                  Max.   :259.7  
+
+exp_var:
+     np      dist   gamma dir.hor dir.ver   id
+1    17   59.3347 23959.6       0       0 var1
+2    36   86.0145 16671.6       0       0 var1
+3   114  131.0287 33270.3       0       0 var1
+4   149  176.1885 52846.3       0       0 var1
+5   184  226.7565 34555.3       0       0 var1
+6   711  337.6036 50150.7       0       0 var1
+7   830  502.0477 50347.6       0       0 var1
+8  1349  713.2149 61255.3       0       0 var1
+9  1314  961.2718 70311.9       0       0 var1
+10 1139 1213.4116 75870.3       0       0 var1
+11 1355 1506.5505 72043.9       0       0 var1
+
+var_model:
+  model    psill   range kappa
+1   Nug  2454.94   0.000   0.0
+2   Ste 68746.15 482.025   0.3
+Sums of squares betw. var. model and sample var.[1] 2044182
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:     upper          lower                       position       geometry   
+ Min.   : 166   Min.   :-662.8   higher             : 933   POINT  :3103  
+ 1st Qu.: 481   1st Qu.:-249.0   not distinguishable:2170   epsg:NA:   0  
+ Median : 610   Median : -90.7                                            
+ Mean   : 715   Mean   : -25.1                                            
+ 3rd Qu.: 912   3rd Qu.: 140.1                                            
+ Max.   :1970   Max.   :1485.5                                            
+
+$p
+[1] 95
+
+$value
+[1] 75
+
+> 
+> # Block kriging
+> kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid, block = c(400,400))
+[using universal kriging]
+> summary(kriging_result)
+krige_output:
+   var1.pred       var1.var        geometry      var1.stdev   
+ Min.   :-190   Min.   : 2251   POINT  :3103   Min.   : 47.4  
+ 1st Qu.: 112   1st Qu.: 4680   epsg:NA:   0   1st Qu.: 68.4  
+ Median : 283   Median : 6688                  Median : 81.8  
+ Mean   : 348   Mean   : 8516                  Mean   : 88.6  
+ 3rd Qu.: 536   3rd Qu.:10855                  3rd Qu.:104.2  
+ Max.   :1338   Max.   :29401                  Max.   :171.5  
+
+exp_var:
+     np      dist   gamma dir.hor dir.ver   id
+1    17   59.3347 23959.6       0       0 var1
+2    36   86.0145 16671.6       0       0 var1
+3   114  131.0287 33270.3       0       0 var1
+4   149  176.1885 52846.3       0       0 var1
+5   184  226.7565 34555.3       0       0 var1
+6   711  337.6036 50150.7       0       0 var1
+7   830  502.0477 50347.6       0       0 var1
+8  1349  713.2149 61255.3       0       0 var1
+9  1314  961.2718 70311.9       0       0 var1
+10 1139 1213.4116 75870.3       0       0 var1
+11 1355 1506.5505 72043.9       0       0 var1
+
+var_model:
+  model    psill   range kappa
+1   Nug  2454.94   0.000   0.0
+2   Ste 68746.15 482.025   0.3
+Sums of squares betw. var. model and sample var.[1] 2044182
+> pos = posPredictionInterval(kriging_result, 95, 75)
+> summary(pos)
+Upper and lower boundary and the position relative to value:     upper          lower                       position       geometry   
+ Min.   :  24   Min.   :-490.6   higher             :1790   POINT  :3103  
+ 1st Qu.: 277   1st Qu.: -47.5   lower              : 107   epsg:NA:   0  
+ Median : 433   Median : 131.8   not distinguishable:1206                 
+ Mean   : 522   Mean   : 174.4                                            
+ 3rd Qu.: 733   3rd Qu.: 359.4                                            
+ Max.   :1480   Max.   :1196.4                                            
+
+$p
+[1] 95
+
+$value
+[1] 75
+
+> 
+> # Kriging with power model
+> kriging_result = autoKrige(zinc~soil+ffreq+dist, meuse, meuse.grid, model = "Pow")
+[using universal kriging]
+Warning message:
+In getModel(initial_sill - initial_nugget, m, initial_range, kappa = 0,  :
+  Using the power model is at your own risk, read the docs of autofitVariogram for more details.
+> 
+> 
+> proc.time()
+   user  system elapsed 
+  14.95    0.29   15.26 

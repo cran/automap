@@ -104,7 +104,7 @@ checkIfautokrige.cv = function(l) {
   l = lapply(l, function(x) { 
           if(inherits(x, "autoKrige.cv")) {                   # autoKrige.cv output
               return(x)
-          } else if(inherits(x, "SpatialPointsDataFrame")){   # krige.cv output
+          } else if(inherits(x, "sf") | inherits(x, "SpatialPointsDataFrame")){   # krige.cv output
               x = list(krige.cv_output = x)
               class(x) = "autoKrige.cv"
               return(x)
@@ -129,8 +129,10 @@ cv.compare.bubble = function(objs, zcol, key.entries, layout, col.names, plot.di
 		obj$krige.cv_output$diff = ref_data^2 - obj$krige.cv_output[[zcol]]^2
 		plot.column = "diff"
 		if(it == reference) main = "Reference" else main = as.expression(parse(text = paste("Ref^2 -", col.names[it],"^2", sep = "")))
-	}
-	plot_list[[it]] = bubble(obj$krige.cv_output, 
+    }
+	ospat = obj$krige.cv_output
+	if (inherits(ospat, "sf")) ospat = as(ospat, "Spatial")
+	plot_list[[it]] = bubble(ospat, 
     					zcol = plot.column, 
 						key.entries = key.entries,
 						main = main,

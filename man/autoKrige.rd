@@ -25,8 +25,10 @@
 				universal kriging, suppose 'z' is linearly dependent on 'x'
 				and 'y', use the formula 'z~x+y'.}
     \item{input_data}{An object of the 
-	            \link[sp]{SpatialPointsDataFrame-class} containing the data to be interpolated.}
-    \item{new_data}{A \code{sp} object containing the prediction locations. \code{new_data} can be
+	            \link[sp]{SpatialPointsDataFrame-class} or \link[sf]{sf} 
+	                 containing the data to be interpolated.}
+    \item{new_data}{A \code{sp}, \code{sf} or \code{stars} (\code{\link[stars]{st_as_stars}}) object containing the 
+        prediction locations. \code{new_data} can be
 				a points set, a grid or a polygon. Must not contain NA's. If this object is not provided
 				a default is calculated. This is done by taking the convex hull of \code{input_data} and 
 				placing around 5000 gridcells in that convex hull.}
@@ -85,11 +87,13 @@ and \code{sserr} respectively.
 \seealso{\code{\link{autofitVariogram}}, \code{\link[gstat]{krige}}}
 \examples{
 # Data preparation
-\dontrun{
+\donttest{
+library(sp)
 data(meuse)
 coordinates(meuse) =~ x+y
 data(meuse.grid)
 gridded(meuse.grid) =~ x+y
+
 
 # Ordinary kriging, no new_data object
 kriging_result = autoKrige(zinc~1, meuse)
@@ -123,5 +127,12 @@ kr = autoKrige(zinc~dist, meuse.dup, meuse.grid)
 prediction_spdf = kr$krige_output
 sample_variogram = kr$exp_var
 variogram_model = kr$var_model
+
+meuse = st_as_sf(meuse)
+meuse.grid = st_as_stars(meuse.grid)
+kriging_result = autoKrige(zinc~1, meuse, 
+	meuse.grid, fix.values = c(0.2,NA,NA))
+
+
 }
 }

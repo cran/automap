@@ -52,6 +52,7 @@ autoKrige.cv(formula,
 \author{Paul Hiemstra, \email{paul@numbertheory.nl}}
 \seealso{\code{\link[gstat]{krige.cv}}, \code{\link{autofitVariogram}}, \code{\link{compare.cv}} }
 \examples{
+library(sp)
 data(meuse)
 coordinates(meuse) = ~x+y
 data(meuse.grid)
@@ -62,4 +63,6 @@ kr_dist.cv = autoKrige.cv(log(zinc)~sqrt(dist), meuse,
        model = c("Exp"), nfold = 10)
 kr_dist_ffreq.cv = autoKrige.cv(log(zinc)~sqrt(dist)+ffreq, 
        meuse, model = c("Exp"), nfold = 10)
+       
+
 } 

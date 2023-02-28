@@ -12,9 +12,18 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
     miscFitOptions = modifyList(miscFitOptionsDefaults, miscFitOptions)
   
     # Create boundaries
-    longlat = !is.projected(input_data)
-    if(is.na(longlat)) longlat = FALSE
-    diagonal = spDists(t(bbox(input_data)), longlat = longlat)[1,2]                # 0.35 times the length of the central axis through the area
+    if (is(input_data, "Spatial")) {
+      longlat = !is.projected(input_data)
+      if(is.na(longlat)) longlat = FALSE
+      diagonal = spDists(t(bbox(input_data)), longlat = longlat)[1,2]                # 0.35 times the length of the central axis through the area
+    } else {
+      longlat = st_is_longlat(input_data)
+      if (is.na(longlat)) longlat = FALSE
+      bb = st_bbox(input_data)
+      diagonal = sqrt(((bb$xmax-bb$xmin)^2)+((bb$ymax-bb$ymin)^2))
+    }
+    
+    
     boundaries = c(2,4,6,9,12,15,25,35,50,65,80,100) * diagonal * 0.35/100         # Boundaries for the bins in km
     
     

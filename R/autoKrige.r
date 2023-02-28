@@ -11,10 +11,14 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
   		formula = as.formula(paste(names(input_data)[1], "~ 1"))
   	}
 
-    # Check if inpu_data and data_variogram are SpatialPointsDataFrame
-    if(!inherits(input_data,"SpatialPointsDataFrame") | !inherits(data_variogram,"SpatialPointsDataFrame"))
+    # Check if input_data and data_variogram are SpatialPointsDataFrame or sf-objects
+    if((!inherits(input_data, "SpatialPointsDataFrame") | !inherits(data_variogram,"SpatialPointsDataFrame")) &
+       (!(inherits(input_data, "sf") & inherits(input_data, "data.frame")) |
+       !(inherits(data_variogram, "sf") & inherits(data_variogram, "data.frame"))))
+       
     {
-        stop(paste("\nInvalid input objects: input_data or data_variogram not of class 'SpatialPointsDataFrame'.\n\tClass input_data: '",
+        stop(paste("\nInvalid input objects: input_data or data_variogram not of class 'SpatialPointsDataFrame' or 'sf'.\n",
+                    "\tClass input_data: '",
                       class(input_data),"'",
                       "\n\tClass data_variogram: '",
                       class(data_variogram),"'",sep=''))
@@ -25,16 +29,18 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
   	
     # Check if there are points or gridcells on the exact same coordinate and provide a more informative error message.
     # Points on the same spot causes the interpolation to crash.
-    if(remove_duplicates) 
-    {
-        zd = zerodist(input_data)
-        if(length(zd) != 0) 
-        {
-            warning("Removed ", length(zd) / 2, " duplicate observation(s) in input_data:", immediate. = TRUE)
-  		print(input_data[c(zd), ])
-          	input_data = input_data[-zd[, 2], ]   
-  
-        }
+    if(remove_duplicates) {
+      if (inherits(input_data, "Spatial")) {  
+        zd = zerodist(input_data)[,2]
+      } else if (inherits(input_data, "sf")) {
+        zd = unlist(st_equals(input_data, retain_unique = TRUE))
+      }
+      
+      if(length(zd) != 0) {
+        warning("Removed ", length(zd) / 2, " duplicate observation(s) in input_data:", immediate. = TRUE)
+  		  print(input_data[c(zd), ])
+        input_data = input_data[-zd, ]   
+      }
     }
 
     # If all the values return an informative error
@@ -44,17 +50,27 @@ autoKrige = function(formula, input_data, new_data, data_variogram = input_data,
   	if(missing(new_data)) new_data = create_new_data(input_data)
   
   	## Perform some checks on the projection systems of input_data and new_data
-  	p4s_obj1 = proj4string(input_data)
-   	p4s_obj2 = proj4string(new_data)
+  	if (is(input_data, "Spatial")) p4s_obj1 = proj4string(input_data) else p4s_obj1 = st_crs(input_data)
+    if (is(new_data, "Spatial")) p4s_obj2 = proj4string(new_data) else p4s_obj2 = st_crs(new_data)
   	if(!all(is.na(c(p4s_obj1, p4s_obj2)))) {
-  		if(is.na(p4s_obj1) & !is.na(p4s_obj2)) proj4string(input_data) = proj4string(new_data)
-  		if(!is.na(p4s_obj1) & is.na(p4s_obj2)) proj4string(new_data) = proj4string(input_data)
-  		if(any(!c(is.projected(input_data), is.projected(new_data)))) stop(paste("Either input_data or new_data is in LongLat, please reproject.\n", 
+  		if(is.na(p4s_obj1) & !is.na(p4s_obj2) & is(input_data, "Spatial")) proj4string(input_data) = proj4string(new_data)
+  		if(!is.na(p4s_obj1) & is.na(p4s_obj2) & is(input_data, "Spatial")) proj4string(new_data) = proj4string(input_data)
+  		if(is.na(p4s_obj1) & !is.na(p4s_obj2) & is(input_data, "sf")) st_crs(input_data) = st_crs(new_data)
+  		if(!is.na(p4s_obj1) & is.na(p4s_obj2) & is(input_data, "sf")) st_crs(new_data) = st_crs(input_data)
+  		if (is(input_data, "Spatial")) {
+    		if(any(!c(is.projected(input_data), is.projected(new_data)))) stop(paste(
+  		                  "Either input_data or new_data is in LongLat, please reproject.\n", 
   											"  input_data: ", p4s_obj1, "\n",
   											"  new_data:   ", p4s_obj2, "\n"))
-  		if(proj4string(input_data) != proj4string(new_data)) stop(paste("Projections of input_data and new_data do not match:\n",
-  											"  input_data: ", p4s_obj1, "\n",
-  											"  new_data:    ", p4s_obj2, "\n"))
+  		  if(proj4string(input_data) != proj4string(new_data)) stop(paste("Projections of input_data and new_data do not match:\n",
+  		                                                                  "  input_data: ", p4s_obj1, "\n",
+  		                                                                  "  new_data:    ", p4s_obj2, "\n"))
+  		} else if (is(input_data, "sf")) {
+  		  if (st_crs(input_data) != st_crs(new_data))  stop(paste("Projections of input_data and new_data do not match:\n",
+  		                                                          "  input_data: ", p4s_obj1, "\n",
+  		                                                          "  new_data:    ", p4s_obj2, "\n"))
+  		  
+  		}
   	}
 
     # Fit the variogram model, first check which model is used
