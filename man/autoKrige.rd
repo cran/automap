@@ -89,6 +89,8 @@ and \code{sserr} respectively.
 # Data preparation
 \donttest{
 library(sp)
+library(sf)
+library(stars)
 data(meuse)
 coordinates(meuse) =~ x+y
 data(meuse.grid)
@@ -128,6 +130,7 @@ prediction_spdf = kr$krige_output
 sample_variogram = kr$exp_var
 variogram_model = kr$var_model
 
+coordinates(meuse) = ~x + y
 meuse = st_as_sf(meuse)
 meuse.grid = st_as_stars(meuse.grid)
 kriging_result = autoKrige(zinc~1, meuse, 

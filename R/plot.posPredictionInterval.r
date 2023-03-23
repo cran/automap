@@ -2,7 +2,7 @@ plot.posPredictionInterval = function(x, sp.layout = NULL, justPosition = TRUE, 
 # Plot function for posPredictionInterval
 {
     pos_prediction = x$pos_prediction
-    if (inherits(pos_prediction, "sf")) pos_prediction = as(pos_prediction, "Spatial")
+    if (!inherits(pos_prediction, "Spatial")) pos_prediction = as(pos_prediction, "Spatial")
     upper = automapPlot(pos_prediction,
                         zcol = "upper",
                         main = "Upper boundary",

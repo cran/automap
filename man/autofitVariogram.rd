@@ -111,11 +111,10 @@ variogram = autofitVariogram(zinc ~ soil + ffreq + dist, meuse,
     miscFitOptions = list(min.np.bin = 500, merge.small.bins = FALSE))
 plot(variogram)
 
-\donttest{
 # An example of autofitVariogram with anisotropic sample variogram.
 # This is not supported, see details section.
 vm.isotropic = autofitVariogram(log(zinc) ~ dist, meuse)
-vm.anisotropic = autofitVariogram(log(zinc) ~ dist, meuse, alpha = c(0,45,90,135))
-}
+# The following line might not work, depending on version of R and gstat
+# vm.anisotropic = autofitVariogram(log(zinc) ~ dist, meuse, alpha = c(0,45,90,135))
 
 }

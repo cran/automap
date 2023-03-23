@@ -1,18 +1,18 @@
 Package: automap
-Version: 1.1-1
-Date: 2023-02-17
+Version: 1.1-9
+Date: 2023-03-23
 Title: Automatic Interpolation Package
 Authors@R: c(person("Paul", "Hiemstra", role = c("aut"), email = "p.h.hiemstra@gmail.com"),
              person("Jon Olav", "Skoien", role = c("aut", "cre"), email = "jon.skoien@gmail.com"))
 Maintainer: Jon Olav Skoien <jon.skoien@gmail.com>
-Description: Performs an automatic interpolation by automatically estimating the variogram and then calling gstat.
+Description: An automatic interpolation is done by automatically estimating the variogram and then calling gstat. An overview is given by Hiemstra et al (2008) <doi:10.1016/j.cageo.2008.10.011>.
 Depends: R (>= 2.10.0)
 Imports: gstat, lattice, reshape, methods, ggplot2, sp, sf, stars,
         graphics
 License: GPL
-Packaged: 2023-02-21 14:39:14 UTC; skoiejo
 NeedsCompilation: no
 Repository: CRAN
-Date/Publication: 2023-02-28 21:22:30 UTC
+Packaged: 2023-03-23 07:52:53 UTC; skoiejo
 Author: Paul Hiemstra [aut],
   Jon Olav Skoien [aut, cre]
+Date/Publication: 2023-03-23 12:42:04 UTC

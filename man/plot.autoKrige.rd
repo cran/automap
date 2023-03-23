@@ -23,6 +23,7 @@
 \examples{
 # Ordinary kriging
 library(sp)
+library(sf)
 data(meuse)
 coordinates(meuse) =~ x+y
 data(meuse.grid)

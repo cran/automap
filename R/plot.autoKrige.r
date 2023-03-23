@@ -13,10 +13,8 @@ plot.autoKrige = function(x, sp.layout = NULL, ...)
 #			direction = c(x$dir.hor[1], x$dir.ver[1]), shift = shift, 
 #			mode = "direct", ...)
     kout = x$krige_output
-    if (inherits(kout, "sf")) {
-      kout = as(kout, "Spatial")
+      if (!inherits(kout, "Spatial")) kout = as(kout, "Spatial")
       gridded(kout) = TRUE
-    }
     pred = automapPlot(kout,
           zcol = "var1.pred",
           main = "Kriging prediction",

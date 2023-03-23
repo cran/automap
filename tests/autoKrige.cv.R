@@ -1,5 +1,6 @@
 library(automap)
 library(sp)
+library(sf)
 
 data(meuse)
 coordinates(meuse) = ~x+y

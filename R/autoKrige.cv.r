@@ -1,6 +1,6 @@
 autoKrige.cv = function(formula, input_data, data_variogram = input_data,
                           model = c("Sph", "Exp", "Gau", "Ste"), kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), 
-						  fix.values = c(NA,NA,NA), verbose = c(FALSE, TRUE), GLS.model = NA,
+						  fix.values = c(NA,NA,NA), verbose = c(FALSE, interactive()), GLS.model = NA,
                           start_vals = c(NA,NA,NA), miscFitOptions = list(),...)
 # Automatically fits a variogram model to the data using autofitVariogram and performs
 # crossvalidation by calling krige.cv
@@ -174,8 +174,8 @@ cv.compare.ggplot = function(objs, zcol = "residual", layout, col.names, addPoly
   # Make plot
   ggobj = ggplot(aes_string(x = coornames[1], y = coornames[2], size = zcol_abs, color = zcol), data = dat) +
       facet_wrap(~ L1, ncol = layout[1], nrow = layout[2], as.table = TRUE) + 
-      scale_x_continuous(name = "", breaks = NA, labels = NA) + 
-      scale_y_continuous(name = "", breaks = NA, labels = NA) + coord_equal() +
+      scale_x_continuous(name = "", breaks = NULL, labels = NULL) + 
+      scale_y_continuous(name = "", breaks = NULL, labels = NULL) + coord_equal() +
       scale_color_gradient2("Under- or \noverestimation", high = "green", low = "red", mid = "grey80") + 
       scale_size_continuous("Amount")
   if(!is.null(addPoly)) {
