@@ -1,6 +1,7 @@
 library(automap)
 library(sp)
-library(sf)
+# Neccessary to silence sf startup messages
+suppressMessages(library(sf))
 
 data(meuse)
 coordinates(meuse) = ~x+y

@@ -19,8 +19,8 @@ Type 'q()' to quit R.
 > 
 > library(automap)
 > library(sp)
-> library(sf)
-Linking to GEOS 3.11.1, GDAL 3.6.2, PROJ 9.1.1; sf_use_s2() is TRUE
+> # Neccessary to silence sf startup messages
+> suppressMessages(library(sf))
 > 
 > 
 > # Data preparation

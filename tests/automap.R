@@ -2,7 +2,8 @@ options(digits=6)
 
 library(automap)
 library(sp)
-library(sf)
+# Neccessary to silence sf startup messages
+suppressMessages(library(sf))
 
 
 # Data preparation

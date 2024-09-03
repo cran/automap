@@ -1,4 +1,4 @@
-8b9007d9eeced3c51452325f5931cde0 *DESCRIPTION
+263e95201070c781d7f4613e83969135 *DESCRIPTION
 cde96cb4b3d3985e8e3f202c94c48d64 *NAMESPACE
 d4ea0a285cff682905a8a365c88e3062 *R/autoKrige.cv.r
 8f86d340fddf8c2fbdc7988559adb866 *R/autoKrige.r
@@ -24,7 +24,7 @@ c1b1d31b89413ba98edc21f2b3659f5e *man/automapPlot.rd
 51f0398ff02ddf6dbc6eb1c5824094ba *man/compare.cv.rd
 1293ac3cc58e8fad87c4cd3adbad388e *man/plot.autoKrige.rd
 a5a91db7512b38ac97c3c2a3216f347e *man/posPredictionInterval.rd
-006570053c78487e59cfaaef27c61da6 *tests/autoKrige.cv.R
-33e98d996dc305784dc0ac2d98507578 *tests/autoKrige.cv.Rout.save
-36ab555bde59ba4a7c78d07c9100e869 *tests/automap.R
-091ded60f0416cb73b89ac4cacb0e0f7 *tests/automap.Rout.save
+fb8baf18814bba11d71d1e0be9aaf917 *tests/autoKrige.cv.R
+9055c1656ee17bede7f627ba07ae78ad *tests/autoKrige.cv.Rout.save
+e7c49b1672fda46aafe0ffaf82430660 *tests/automap.R
+5819bac41b1677fa78f2d70efc4d7164 *tests/automap.Rout.save
