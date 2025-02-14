@@ -1,6 +1,6 @@
 Package: automap
-Version: 1.1-12
-Date: 2024-09-03
+Version: 1.1-16
+Date: 2025-02-13
 Title: Automatic Interpolation Package
 Authors@R: c(person("Paul", "Hiemstra", role = c("aut"), email = "p.h.hiemstra@gmail.com"),
              person("Jon Olav", "Skoien", role = c("aut", "cre"), email = "jon.skoien@gmail.com"))
@@ -12,7 +12,7 @@ Imports: gstat, lattice, reshape, methods, ggplot2, sp, sf, stars,
 License: GPL
 NeedsCompilation: no
 Repository: CRAN
-Packaged: 2024-09-03 13:34:48 UTC; skoiejo
+Packaged: 2025-02-13 16:44:19 UTC; skoiejo
 Author: Paul Hiemstra [aut],
   Jon Olav Skoien [aut, cre]
-Date/Publication: 2024-09-03 15:50:06 UTC
+Date/Publication: 2025-02-14 00:00:02 UTC

@@ -1,4 +1,4 @@
-263e95201070c781d7f4613e83969135 *DESCRIPTION
+b48889a62a04e8f7adce390f03098b4f *DESCRIPTION
 cde96cb4b3d3985e8e3f202c94c48d64 *NAMESPACE
 d4ea0a285cff682905a8a365c88e3062 *R/autoKrige.cv.r
 8f86d340fddf8c2fbdc7988559adb866 *R/autoKrige.r
@@ -10,7 +10,7 @@ b931e0c53bd5c0011a135a2dbf565972 *R/plot.autoKrige.r
 2e8b6d8444fd86a8e8f401dfc211e8ea *R/plot.autofitVariogram.r
 df1fbf68735e53f29cd14d16defa6a14 *R/plot.posPredictionInterval.r
 cc5fc6cc9b836c6a65ae210f095ef3e0 *R/posPredictionInterval.r
-6b82981ba8887574919956f39983d2ba *R/summary.autoKrige.r
+59ec1d4d5862f8042346b231d50bec8a *R/summary.autoKrige.r
 cff2d3a3006098eb625e8233ce9af15d *R/summary.autofitVariogram.r
 1e2fc97a0b4cf790606fac1ffd5e1c93 *R/summary.posPredictionInterval.r
 40736f2ab4dd1cc013bff222293d0521 *README
@@ -25,6 +25,6 @@ c1b1d31b89413ba98edc21f2b3659f5e *man/automapPlot.rd
 1293ac3cc58e8fad87c4cd3adbad388e *man/plot.autoKrige.rd
 a5a91db7512b38ac97c3c2a3216f347e *man/posPredictionInterval.rd
 fb8baf18814bba11d71d1e0be9aaf917 *tests/autoKrige.cv.R
-9055c1656ee17bede7f627ba07ae78ad *tests/autoKrige.cv.Rout.save
-e7c49b1672fda46aafe0ffaf82430660 *tests/automap.R
-5819bac41b1677fa78f2d70efc4d7164 *tests/automap.Rout.save
+9d878c95368d34527e970e436d107311 *tests/autoKrige.cv.Rout.save
+d16bb9e690a75645ab29f1004f4cc7a7 *tests/automap.R
+808cf1667f070ddaabf2f9e934a013e9 *tests/automap.Rout.save
