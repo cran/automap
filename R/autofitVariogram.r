@@ -1,6 +1,6 @@
 autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", "Ste"),
                                 kappa = c(0.05, seq(0.2, 2, 0.1), 5, 10), fix.values = c(NA,NA,NA),
-								verbose = FALSE, GLS.model = NA, start_vals = c(NA,NA,NA), 
+								verbose = FALSE, GLS.model = NA, start_vals = c(NA,NA,NA), cutoff, 
                                 miscFitOptions = list(),...)
 # This function automatically fits a variogram to input_data
 {
@@ -12,7 +12,9 @@ autofitVariogram = function(formula, input_data, model = c("Sph", "Exp", "Gau", 
     miscFitOptions = modifyList(miscFitOptionsDefaults, miscFitOptions)
   
     # Create boundaries
-    if (is(input_data, "Spatial")) {
+    if (!missing(cutoff)) {
+      diagonal = cutoff/0.35
+    } else if (is(input_data, "Spatial")) {
       longlat = !is.projected(input_data)
       if(is.na(longlat)) longlat = FALSE
       diagonal = spDists(t(bbox(input_data)), longlat = longlat)[1,2]                # 0.35 times the length of the central axis through the area

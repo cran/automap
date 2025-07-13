@@ -13,6 +13,7 @@ range etc. \code{autofitVariogram} provides this estimate based on the data and 
          verbose = FALSE, 
          GLS.model = NA,
          start_vals = c(NA,NA,NA),
+         cutoff,
          miscFitOptions = list(),
          ...)}
 \arguments{
@@ -37,6 +38,7 @@ range etc. \code{autofitVariogram} provides this estimate based on the data and 
     \item{start_vals}{Can be used to give the starting values for the variogram fitting. The items describe the
                  fixed value for the nugget, range and sill respectively. They need to be given in that order.
                  Setting the value to NA means that the value will be automatically chosen.} 
+    \item{cutoff}{A maximum range to be used for the empirical variogram}
     \item{miscFitOptions}{A list with named arguments that provide additional control over the fitting process. 
                  For example: \code{list(merge.small.bins = TRUE)}. If the list is empty, autofitVariogram 
                  uses default values. The following parameters can be set:

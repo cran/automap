@@ -1,6 +1,5 @@
 Package: automap
-Version: 1.1-16
-Date: 2025-02-13
+Version: 1.1-20
 Title: Automatic Interpolation Package
 Authors@R: c(person("Paul", "Hiemstra", role = c("aut"), email = "p.h.hiemstra@gmail.com"),
              person("Jon Olav", "Skoien", role = c("aut", "cre"), email = "jon.skoien@gmail.com"))
@@ -9,10 +8,11 @@ Description: An automatic interpolation is done by automatically estimating the 
 Depends: R (>= 2.10.0)
 Imports: gstat, lattice, reshape, methods, ggplot2, sp, sf, stars,
         graphics
+BugReports: https://github.com/jskoien/jskoien/issues
 License: GPL
 NeedsCompilation: no
 Repository: CRAN
-Packaged: 2025-02-13 16:44:19 UTC; skoiejo
+Packaged: 2025-07-11 15:29:47 UTC; skoiejo
 Author: Paul Hiemstra [aut],
   Jon Olav Skoien [aut, cre]
-Date/Publication: 2025-02-14 00:00:02 UTC
+Date/Publication: 2025-07-13 23:10:10 UTC

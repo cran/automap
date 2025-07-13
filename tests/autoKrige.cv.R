@@ -1,5 +1,11 @@
+Sys.unsetenv("KMP_DEVICE_THREAD_LIMIT")
+Sys.unsetenv("KMP_ALL_THREADS")
+Sys.unsetenv("KMP_TEAMS_THREAD_LIMIT")
+Sys.unsetenv("OMP_THREAD_LIMIT")
 library(automap)
 library(sp)
+
+
 # Neccessary to silence sf startup messages
 suppressMessages(library(sf))
 
